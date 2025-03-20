@@ -1,9 +1,29 @@
 package org.example.bookstoreapp.bookModel;
 
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "Book_model")
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     private String title;
     private String author;
     private  String cover;
+
+    @Enumerated(EnumType.STRING)
     private Category category;
     private double discount;
     private double price;
@@ -12,5 +32,8 @@ public class Book {
     private int paperback;
     private int year;
     private int edition;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 }
