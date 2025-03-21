@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.bookModel;
+package org.example.bookstoreapp.book;
 
 
 import jakarta.persistence.*;
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 @Data
 @Builder
