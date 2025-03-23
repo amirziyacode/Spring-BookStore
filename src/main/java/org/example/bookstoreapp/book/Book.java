@@ -1,13 +1,11 @@
 package org.example.bookstoreapp.book;
 
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 @Data
 @Builder
@@ -36,5 +34,6 @@ public class Book {
 
     @Lob
     @Column(columnDefinition = "TEXT")
+    @Basic(fetch = FetchType.LAZY)
     private String description;
 }
