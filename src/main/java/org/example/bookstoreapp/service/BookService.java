@@ -14,12 +14,12 @@ public class BookService {
 
     private final BookRepo bookRepo;
 
-    List<Book> findAllBooks() {
+    public List<Book> getAllBooks() {
             return bookRepo.findAll();
     }
-    Book findByCategory(Category category) {
-        if(bookRepo.findByCategory(category).isPresent()) {
-            return bookRepo.findByCategory(category).get();
+    public List<Book> findByCategory(Category category) {
+        if(!(bookRepo.findByCategory(category).isEmpty())) {
+            return bookRepo.findByCategory(category);
         }
         throw new IllegalArgumentException("No book found for category " + category);
     }
