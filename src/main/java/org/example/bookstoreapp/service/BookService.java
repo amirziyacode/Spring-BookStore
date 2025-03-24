@@ -5,11 +5,13 @@ import org.example.bookstoreapp.book.Book;
 import org.example.bookstoreapp.book.Category;
 import org.example.bookstoreapp.repository.BookRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class BookService {
 
     private final BookRepo bookRepo;
