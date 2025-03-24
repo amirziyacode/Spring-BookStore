@@ -17,9 +17,11 @@ public class BookService {
     public List<Book> getAllBooks() {
             return bookRepo.findAll();
     }
-    public List<Book> findByCategory(Category category) {
-        if(!(bookRepo.findByCategory(category).isEmpty())) {
-            return bookRepo.findByCategory(category);
+    public List<Book> findByCategory(String category) {
+        for(Category cat:Category.values()){
+            if(String.valueOf(cat).equals(category.toUpperCase())){
+                return bookRepo.findByCategory(cat).orElse(null);
+            }
         }
         throw new IllegalArgumentException("No book found for category " + category);
     }

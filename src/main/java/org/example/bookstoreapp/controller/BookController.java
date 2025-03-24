@@ -2,7 +2,6 @@ package org.example.bookstoreapp.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
-import org.example.bookstoreapp.book.Category;
 import org.example.bookstoreapp.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/book")
 public class BookController {
+
     private final BookService bookService;
 
     @GetMapping("allBooks")
@@ -28,6 +28,6 @@ public class BookController {
     @Transactional // => for big text is come from database !!
     @GetMapping("getByCategory")
     public ResponseEntity<List<Book>> getByCategory(@RequestParam String category) {
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.findByCategory(Category.valueOf(category.toUpperCase())));
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.findByCategory(category));
     }
 }
