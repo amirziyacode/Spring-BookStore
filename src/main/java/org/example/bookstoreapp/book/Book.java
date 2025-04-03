@@ -30,6 +30,10 @@ public class Book {
     private double rating;
     private int paperback;
     private int year;
+    private  String publisher;
+    private String language;
+    private boolean isNew;
+    private boolean isBestSeller;
     private int edition;
 
     @Lob
