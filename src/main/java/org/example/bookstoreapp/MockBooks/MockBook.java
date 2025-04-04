@@ -25,7 +25,7 @@ public class MockBook implements CommandLineRunner {
             Book grokAlgo = Book.builder()
                     .title("Grokking Algorithms")
                     .author("Aditya Y. Bhargava")
-                    .cover("https://skybooks.ir/images/productImages/Grokking-Algorithms_EB1709675048.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Grokking-Algorithms_EB1709675048.jpg")
                     .price(28.99)
                     .discount(10)
                     .isNew(true)
@@ -35,7 +35,6 @@ public class MockBook implements CommandLineRunner {
                     .category(Category.COMPUTER_SCIENCE)
                     .isbn("9781633438538")
                     .year(2024)
-                    .edition(2)
                     .paperback(322)
                     .description("An Illustrated Guide for Programmers and Other Curious People  A friendly, " +
                             "fully-illustrated introduction to the most important computer programming algorithms." +
@@ -56,10 +55,9 @@ public class MockBook implements CommandLineRunner {
                     .language("English")
                     .publisher("Manning")
                     .category(Category.COMPUTER_SCIENCE)
-                    .edition(1)
                     .isbn("9781617294648")
                     .paperback(480)
-                    .cover("https://skybooks.ir/images/productImages/GrokkingBitcoin1_Rs1657377051.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/GrokkingBitcoin1_Rs1657377051.jpg")
                     .description("If you think Bitcoin is just an alternative currency for geeks, it's time to think again. " +
                             "Grokking Bitcoin opens up this powerful distributed ledger system," +
                             " exploring the technology that enables applications both for Bitcoin-based financial transactions and using the blockchain for registering physical property ownership." +
@@ -72,13 +70,12 @@ public class MockBook implements CommandLineRunner {
                     .author("Rishal Hurbans")
                     .price(20.99)
                     .year(2020)
-                    .edition(1)
                     .language("English")
                     .publisher("Manning")
                     .discount(10)
                     .paperback(393)
                     .isbn("9781617296185")
-                    .cover("https://skybooks.ir/images/productImages/GrokkingArtificialIntelligenceAlgorithms4_uI1657375595.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/GrokkingArtificialIntelligenceAlgorithms4_uI1657375595.jpg")
                     .rating(4.3)
                     .category(Category.COMPUTER_SCIENCE)
                     .description("Understand and Apply the Core Algorithms of Deep Learning and Artificial Intelligence in This Friendly Illustrated Guide Including Exercises and Examples " +
@@ -93,13 +90,12 @@ public class MockBook implements CommandLineRunner {
                     .title("Clean Code")
                     .author("Robert C. Martin")
                     .category(Category.COMPUTER_SCIENCE)
-                    .cover("https://skybooks.ir/images/productImages/CleanCode_hY1655407329.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/CleanCode_hY1655407329.jpg")
                     .rating(4.9)
                     .price(22.99)
                     .language("English")
                     .publisher("Pearson")
                     .isbn("9780132350884")
-                    .edition(1)
                     .year(2009)
                     .paperback(462)
                     .description("Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year," +
@@ -112,7 +108,7 @@ public class MockBook implements CommandLineRunner {
             Book rustAction = Book.builder()
                     .title("Rust in Action")
                     .author("Timothy Samuel McNamara")
-                    .cover("https://skybooks.ir/images/productImages/Rust-in-Action_8D1662717972.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Rust-in-Action_8D1662717972.jpg")
                     .rating(4.4)
                     .price(36.4)
                     .discount(20)
@@ -121,7 +117,6 @@ public class MockBook implements CommandLineRunner {
                     .category(Category.LANGUAGE)
                     .paperback(457)
                     .year(2021)
-                    .edition(1)
                     .isbn("9781617294556")
                     .description("Systems programming concepts and techniques Rust in Action is a hands-on guide to systems programming with Rust. " +
                             "Written for inquisitive programmers, it presents real-world use cases that go far beyond syntax and structure. " +
@@ -137,13 +132,12 @@ public class MockBook implements CommandLineRunner {
                     .price(30.21)
                     .rating(4.6)
                     .category(Category.CRYPTOGRAPHY)
-                    .cover("https://skybooks.ir/images/productImages/Cryptology-For-Engineers_2O1715972130.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Cryptology-For-Engineers_2O1715972130.jpg")
                     .isbn("9789811208041")
                     .paperback(382)
                     .year(2020)
                     .language("English")
                     .publisher("World Scientific")
-                    .edition(1)
                     .description("Cyptology is increasingly becoming one of the most essential topics of interest in everyday life." +
                             " Digital communication happens by transferring data between at least two participants — But do we want to disclose private information while executing a sensitive bank transfer? " +
                             "How about allowing third-party entities to eavesdrop on private calls while performing an important secret business discussion? Do we want to allow ambient communication concerning us to be manipulated while control software is driving our autonomous car along a steep slope? " +
@@ -155,7 +149,7 @@ public class MockBook implements CommandLineRunner {
             Book springAction = Book.builder()
                     .title("Spring in Action")
                     .author("Craig Walls")
-                    .cover("https://skybooks.ir/images/productImages/Spring-Boot-in-Action_XD1659195012.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Spring-Boot-in-Action_XD1659195012.jpg")
                     .isbn("9781617292545")
                     .price(24.99)
                     .rating(4.2)
@@ -164,7 +158,6 @@ public class MockBook implements CommandLineRunner {
                     .year(2016)
                     .paperback(266)
                     .category(Category.LANGUAGE)
-                    .edition(1)
                     .description("A developer-focused guide to writing applications using Spring Boot." +
                             " You'll learn how to bypass the tedious configuration steps so that you can concentrate on your application's behavior.  " +
                             "The Spring Framework simplifies enterprise Java development, but it does require lots of tedious configuration work. " +
@@ -177,12 +170,11 @@ public class MockBook implements CommandLineRunner {
                     .title("Clean Architecture")
                     .author("Robert C. Martin")
                     .price(29.99)
-                    .cover("https://skybooks.ir/images/productImages/CleanArchitecture_1e1655814220.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/CleanArchitecture_1e1655814220.jpg")
                     .rating(4.1)
                     .year(2016)
                     .language("English")
                     .publisher("Person")
-                    .edition(1)
                     .paperback(429)
                     .category(Category.COMPUTER_SCIENCE)
                     .isbn("9780134494166")
@@ -198,10 +190,10 @@ public class MockBook implements CommandLineRunner {
             Book friends = Book.builder()
                     .title("Friends, Lovers, and the Big Terrible Thing")
                     .author("Matthew Perry")
-                    .cover("https://skybooks.ir/images/productImages/Friends-Lovers-and-the-Big-Terrible-Thing_eo1673459140.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Friends-Lovers-and-the-Big-Terrible-Thing_eo1673459140.jpg")
                     .price(28.99)
                     .rating(4.3)
-                    .isBestSeller(true)
+                    .isBestseller(true)
                     .language("English")
                     .publisher("Flatiron Books")
                     .category(Category.BIOGRAPHY)
@@ -209,7 +201,6 @@ public class MockBook implements CommandLineRunner {
                     .year(2022)
                     .isbn("9781250866448")
                     .paperback(280)
-                    .edition(1)
                     .description("The BELOVED STAR OF FRIENDS takes us behind the scenes of the hit sitcom and his struggles with addiction in this “CANDID, DARKLY FUNNY...POIGNANT” memoir (The New York Times)A MOST ANTICIPATED BOOK by Time," +
                             " Associated Press, Goodreads, USA Today, and more!“Hi, my name is Matthew, although you may know me by another name. " +
                             "My friends call me Matty. And I should be dead.”So begins the riveting story of acclaimed actor Matthew Perry, " +
@@ -224,14 +215,13 @@ public class MockBook implements CommandLineRunner {
                     .price(19.99)
                     .rating(4.8)
                     .category(Category.MOTIVATION)
-                    .edition(1)
-                    .isBestSeller(true)
+                    .isBestseller(true)
                     .language("English")
                     .publisher("Avery")
                     .isbn("9780735211292")
                     .paperback(320)
                     .year(2018)
-                    .cover("https://skybooks.ir/images/productImages/Atomic-Habits_E71670759776.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Atomic-Habits_E71670759776.jpg")
                     .description("An Easy & Proven Way to Build Good Habits & Break Bad Ones Tiny Changes," +
                             " Remarkable Results No matter your goals, Atomic Habits offers a proven framework for improving--every day. " +
                             "James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, " +
@@ -247,14 +237,13 @@ public class MockBook implements CommandLineRunner {
                     .rating(4.5)
                     .discount(10)
                     .category(Category.MOTIVATION)
-                    .isBestSeller(true)
+                    .isBestseller(true)
                     .language("English")
                     .publisher("Lioncrest")
                     .isbn("9781544512280")
                     .paperback(297)
-                    .edition(1)
                     .year(2018)
-                    .cover("https://skybooks.ir/images/productImages/Cant-Hurt-Me_pU1691501515.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Cant-Hurt-Me_pU1691501515.jpg")
                     .description("For David Goggins, childhood was a nightmare -- poverty, prejudice, and physical abuse colored his days and haunted his nights. " +
                             "But through self-discipline, mental toughness, and hard work, " +
                             "Goggins transformed himself from a depressed, overweight young man with no future into a U.S. " +
@@ -265,14 +254,13 @@ public class MockBook implements CommandLineRunner {
             Book deepWork = Book.builder()
                     .title("Deep Work")
                     .author("Cal Newport")
-                    .cover("https://skybooks.ir/images/productImages/Deep-Work_eS1735691151.jpg")
+                    .coverImage("https://skybooks.ir/images/productImages/Deep-Work_eS1735691151.jpg")
                     .year(2016)
                     .paperback(195)
                     .category(Category.MOTIVATION)
-                    .edition(1)
                     .language("English")
                     .publisher("Grand Central")
-                    .isBestSeller(true)
+                    .isBestseller(true)
                     .rating(4.2)
                     .price(19.99)
                     .isbn("9780349413686")

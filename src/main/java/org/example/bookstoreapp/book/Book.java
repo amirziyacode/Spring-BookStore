@@ -20,7 +20,7 @@ public class Book {
 
     private String title;
     private String author;
-    private  String cover;
+    private  String coverImage;
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -33,8 +33,7 @@ public class Book {
     private  String publisher;
     private String language;
     private boolean isNew;
-    private boolean isBestSeller;
-    private int edition;
+    private boolean isBestseller;
 
     @Lob
     @Column(columnDefinition = "TEXT")
