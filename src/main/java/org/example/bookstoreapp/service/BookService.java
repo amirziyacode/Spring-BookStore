@@ -27,4 +27,12 @@ public class BookService {
         }
         throw new IllegalArgumentException("No book found for category " + category);
     }
+
+    public Book findById(int id) {
+        if(bookRepo.findById(id).isPresent()){
+            return bookRepo.findById(id).get();
+        }else {
+            throw new IllegalArgumentException("No book found for id " + id);
+        }
+    }
 }

@@ -28,4 +28,9 @@ public class BookController {
     public ResponseEntity<List<Book>> getByCategory(@RequestParam String category) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findByCategory(category));
     }
+
+    @GetMapping("getById")
+        public ResponseEntity<Book> getById(@RequestParam int id) {
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.findById(id));
+    }
 }
