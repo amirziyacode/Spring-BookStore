@@ -272,8 +272,72 @@ public class MockBook implements CommandLineRunner {
                             "He claims that the best way to break away from the corporate race is to take a break from technology and social media and use some alone-time to rewind and introspect. " +
                             "Newport enforces the beliefs of a non-technophile to deliver work that is productive and efficiently delivered.")
                     .build();
+            Book theEffectiveProductDesigner = Book.builder()
+                    .title("The Effective Product Designer")
+                    .author("Artiom Dashinsky")
+                    .price(28.99)
+                    .discount(10)
+                    .rating(4)
+                    .isbn("9798326456779")
+                    .publisher("Independently Published")
+                    .coverImage("https://skybooks.ir/images/productImages/The-Effective-Product-Designer_xd1743764952.jpg")
+                    .language("English")
+                    .year(2024)
+                    .isNew(true)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .paperback(236)
+                    .description("The best designers are effective outside of Figma." +
+                            "Learn how to achieve more as a designer with 27 actionable lessons on communication, persuasion, influence, decision-making, productivity, and more." +
+                            "This book will help you:" +
+                            "Boost impact — Discover strategies that top designers use to influence others, sell their ideas, and generate more value." +
+                            "Build a better career — Learn which companies to join to maximize wealth and to create positive change." +
+                            "Attract more opportunities — Build relationships and a personal brand to maximize your career development.\n" +
+                            "Learn better and faster — Acquire the right knowledge faster by knowing what and from whom to learn next.")
+                    .build();
+            Book webAppSecurity = Book.builder()
+                    .title("Web Application Security")
+                    .author("Andrew Hoffman")
+                    .isNew(true)
+                    .paperback(444)
+                    .coverImage("https://skybooks.ir/images/productImages/Web-Application-Security_3K1706285538.jpg")
+                    .category(Category.COMPUTER_SCIENCE)
+                    .year(2024)
+                    .price(37.25)
+                    .language("English")
+                    .publisher("O'Reilly")
+                    .isbn("9781098143930")
+                    .rating(4.5)
+                    .isBestseller(true)
+                    .description("Exploitation and Countermeasures for Modern Web Applications In the first edition of this critically acclaimed book," +
+                            " Andrew Hoffman defined the three pillars of application security: reconnaissance, offense, and defense. " +
+                            "In this revised and updated second edition, he examines dozens of related topics, " +
+                            "from the latest types of attacks and mitigations to threat modeling, the secure software development lifecycle (SSDL/SDLC), and more.")
+                    .build();
 
-
+            Book lawOfPower = Book.builder()
+                    .title("The 48 Laws of Power")
+                    .author("Robert Greene ")
+                    .isBestseller(true)
+                    .paperback(478)
+                    .category(Category.MOTIVATION)
+                    .year(1998)
+                    .language("English")
+                    .publisher("Penguin Books")
+                    .price(45.99)
+                    .discount(20)
+                    .rating(4.8)
+                    .isbn("9780140280197")
+                    .coverImage("https://skybooks.ir/images/productImages/The-48-Laws-of-Power_sh1670770669.jpg")
+                    .description("Amoral, cunning, ruthless, and instructive, this multi-million-copy New York Times bestseller is the definitive manual for anyone interested in gaining, observing, or defending against ultimate control – from the author of The Laws of Human Nature." +
+                            "In the book that People magazine proclaimed “beguiling” and “fascinating,”" +
+                            " Robert Greene and Joost Elffers have distilled three thousand years of the history of power into 48 essential laws by drawing from the philosophies of Machiavelli, Sun Tzu," +
+                            " and Carl Von Clausewitz and also from the lives of figures ranging from Henry Kissinger to P.T. Barnum.\n" +
+                            "Some laws teach the need for prudence (“Law 1: Never Outshine the Master”), " +
+                            "others teach the value of confidence (“Law 28: Enter Action with Boldness”), " +
+                            "and many recommend absolute self-preservation (“Law 15: Crush Your Enemy Totally”). " +
+                            "Every law, though, has one thing in common: an interest in total domination. In a bold and arresting two-color package, " +
+                            "The 48 Laws of Power is ideal whether your aim is conquest, self-defense, or simply to understand the rules of the game.")
+                    .build();
             bookRepo.save(grokAlgo);
             bookRepo.save(grokBitcoin);
             bookRepo.save(grokAi);
@@ -286,6 +350,9 @@ public class MockBook implements CommandLineRunner {
             bookRepo.save(atomic);
             bookRepo.save(hurt);
             bookRepo.save(deepWork);
+            bookRepo.save(theEffectiveProductDesigner);
+            bookRepo.save(webAppSecurity);
+            bookRepo.save(lawOfPower);
         }
     }
 }
