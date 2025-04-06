@@ -3,6 +3,7 @@ package org.example.bookstoreapp.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
 import org.example.bookstoreapp.service.BookService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,14 @@ public class BookController {
     @GetMapping("allBooks")
     public ResponseEntity<List<Book>> getAllBooks() {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllBooks());
+    }
+    @GetMapping("Books")
+    public ResponseEntity<Page<Book>> getAllBooks(
+            @RequestParam(defaultValue = "0")int pageNumber,
+            @RequestParam(defaultValue = "12") int perPage
+            ) {
+        Page<Book> books = bookService.getAllBooks(pageNumber, perPage);
+        return ResponseEntity.status(HttpStatus.OK).body(books);
     }
 
     @Transactional // => for big text is come from database !!

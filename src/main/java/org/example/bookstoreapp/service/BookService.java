@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
 import org.example.bookstoreapp.book.Category;
 import org.example.bookstoreapp.repository.BookRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -18,6 +21,10 @@ public class BookService {
 
     public List<Book> getAllBooks() {
             return bookRepo.findAll();
+    }
+    public Page<Book> getAllBooks(int pageNumber,int perPage) {
+        Pageable pageable = PageRequest.of(pageNumber,perPage);
+        return bookRepo.findAll(pageable);
     }
     public List<Book> findByCategory(String category) {
         for(Category cat:Category.values()){
