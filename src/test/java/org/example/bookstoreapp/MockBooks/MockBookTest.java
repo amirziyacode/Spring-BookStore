@@ -13,7 +13,7 @@ class MockBookTest {
     private  BookRepo bookRepo;
 
     @Test
-    void check_we_have_12_books(){
-        assertThat(bookRepo.count()).isEqualTo(12);
+    void check_we_have_15_books(){
+        assertThat(bookRepo.count()).isEqualTo(15);
     }
 }
