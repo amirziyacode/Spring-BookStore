@@ -19,10 +19,6 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("allBooks")
-    public ResponseEntity<List<Book>> getAllBooks() {
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllBooks());
-    }
     @GetMapping("Books")
     public ResponseEntity<Page<Book>> getAllBooks(
             @RequestParam(defaultValue = "0")int pageNumber,

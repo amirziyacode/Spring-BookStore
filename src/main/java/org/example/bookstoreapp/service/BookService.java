@@ -19,9 +19,6 @@ public class BookService {
 
     private final BookRepo bookRepo;
 
-    public List<Book> getAllBooks() {
-            return bookRepo.findAll();
-    }
     public Page<Book> getAllBooks(int pageNumber,int perPage) {
         Pageable pageable = PageRequest.of(pageNumber,perPage);
         return bookRepo.findAll(pageable);
