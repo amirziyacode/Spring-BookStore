@@ -1,11 +1,11 @@
-package org.example.bookstoreapp.jwtToken;
+package org.example.bookstoreapp.Models.book.jwtToken;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.bookstoreapp.user.User;
+import org.example.bookstoreapp.Models.book.user.User;
 
 @Data
 @AllArgsConstructor

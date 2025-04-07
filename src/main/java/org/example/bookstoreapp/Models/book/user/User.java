@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.user;
+package org.example.bookstoreapp.Models.book.user;
 
 
 import jakarta.persistence.*;
@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.bookstoreapp.jwtToken.Token;
+import org.example.bookstoreapp.Models.book.jwtToken.Token;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

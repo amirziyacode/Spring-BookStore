@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.book.Book;
+import org.example.bookstoreapp.Models.book.Book;
 import org.example.bookstoreapp.service.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

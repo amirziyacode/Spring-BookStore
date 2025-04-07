@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.MockBooks;
+package org.example.bookstoreapp.springData;
 
 import org.example.bookstoreapp.repository.BookRepo;
 import org.junit.jupiter.api.Test;

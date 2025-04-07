@@ -1,8 +1,8 @@
 package org.example.bookstoreapp.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.book.Book;
-import org.example.bookstoreapp.book.Category;
+import org.example.bookstoreapp.Models.book.Book;
+import org.example.bookstoreapp.Models.book.Category;
 import org.example.bookstoreapp.repository.BookRepo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
