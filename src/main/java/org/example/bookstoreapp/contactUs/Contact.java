@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.Models.book.contactUs;
+package org.example.bookstoreapp.contactUs;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
