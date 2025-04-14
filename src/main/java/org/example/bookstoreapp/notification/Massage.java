@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.contactUs;
+package org.example.bookstoreapp.notification;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -8,15 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.bookstoreapp.user.User;
 import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Contact {
+public class Massage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +28,7 @@ public class Contact {
     private String message;
 
     @CreationTimestamp
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore

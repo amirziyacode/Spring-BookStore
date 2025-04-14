@@ -3,51 +3,50 @@ package org.example.bookstoreapp.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.bookstoreapp.contactUs.Contact;
-import org.example.bookstoreapp.contactUs.ContactResponse;
-import org.example.bookstoreapp.repository.ContactRepo;
+import org.example.bookstoreapp.notification.Massage;
+import org.example.bookstoreapp.notification.NotificationsResponse;
+import org.example.bookstoreapp.repository.NotificationRepo;
 import org.example.bookstoreapp.repository.UserRepo;
 import org.example.bookstoreapp.user.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ContactService {
+public class NotificationService {
 
-    private final ContactRepo contactRepo;
+    private final NotificationRepo notificationRepo;
     private final UserRepo userRepo;
 
-   public List<Contact> findAllByUserId(int userId) {
-        List<Contact>  contacts =  contactRepo.findAll();
-        return contacts.stream().filter(contractUser -> contractUser.getUser().getId() == userId).toList();
+   public List<Massage> findAllByUserId(int userId) {
+        List<Massage>  notifications =  notificationRepo.findAll();
+        return notifications.stream().filter(contractUser -> contractUser.getUser().getId() == userId).toList();
     }
 
-    public ContactResponse addContact(Contact contact) {
+    public NotificationsResponse addMassage(Massage contact) {
         Optional<User> byEmail = userRepo.findByEmail(contact.getEmail());
         if(byEmail.isPresent()) {
-           Contact buildContact = Contact.builder()
+           Massage buildContact = Massage.builder()
                    .user(byEmail.get())
                    .email(contact.getEmail())
                    .fullName(contact.getFullName())
                    .message(contact.getMessage())
                    .subject(contact.getSubject())
-                   .createdAt(LocalDate.now())
+                   .createdAt(LocalDateTime.now())
                    .build();
-           contactRepo.save(buildContact);
-           return  ContactResponse.builder()
+            notificationRepo.save(buildContact);
+           return  NotificationsResponse.builder()
                    .massages("your massage has been added successfully")
-                   .createdAt(LocalDate.now())
+                   .createdAt(LocalDateTime.now())
                    .build();
        }
-        return  ContactResponse.builder()
+        return  NotificationsResponse.builder()
                 .massages("you unavailable contact with this email")
-                .createdAt(LocalDate.now())
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 }

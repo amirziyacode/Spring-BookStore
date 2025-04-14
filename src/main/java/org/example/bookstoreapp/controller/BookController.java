@@ -38,4 +38,9 @@ public class BookController {
         public ResponseEntity<Book> getById(@RequestParam int id) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findById(id));
     }
+
+    @GetMapping("findBestSeller")
+    public ResponseEntity<List<Book>> getBestSeller(@RequestParam int books) {
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.findBestSeller(books));
+    }
 }

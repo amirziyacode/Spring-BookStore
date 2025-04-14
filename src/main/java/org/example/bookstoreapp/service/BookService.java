@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +39,9 @@ public class BookService {
         }else {
             throw new IllegalArgumentException("No book found for id " + id);
         }
+    }
+
+    public List<Book> findBestSeller(int books) {
+       return bookRepo.findAll().stream().filter(Book::isBestseller).limit(books).collect(Collectors.toList());
     }
 }
