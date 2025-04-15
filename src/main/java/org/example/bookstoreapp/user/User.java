@@ -26,6 +26,12 @@ public class User  implements UserDetails {
     private Integer id;
     private String fullName;
     private String email;
+    private Long phoneNumber;
+    private String address;
+    private String city;
+    private String state;
+    private String country;
+    private Integer zipCode;
     private String password;
 
     @Enumerated(EnumType.STRING)

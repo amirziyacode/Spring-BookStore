@@ -17,12 +17,13 @@ public class NotificationController {
     private final NotificationService contactService;
 
     @GetMapping("getMassage")
-    public ResponseEntity<List<Massage>> getContacts(@RequestParam int userId) {
+    public ResponseEntity<List<Massage>> getMassage
+            (@RequestParam int userId) {
         return ResponseEntity.ok().body(contactService.findAllByUserId(userId));
     }
 
     @PostMapping("addContact")
-    public ResponseEntity<NotificationsResponse> addContact(@RequestBody Massage massage) {
+    public ResponseEntity<NotificationsResponse> addMassage(@RequestBody Massage massage) {
         return  ResponseEntity.status(HttpStatus.CREATED).body(contactService.addMassage(massage));
     }
 }
