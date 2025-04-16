@@ -10,8 +10,9 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class AccountResponse {
-    private String fullName;
-    private Long  phoneNumber;
+    private String name;
+    private Long  phone;
+    private String email;
     private String address;
     private String city;
     private String state;

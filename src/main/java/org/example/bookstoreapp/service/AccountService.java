@@ -7,7 +7,7 @@ import org.example.bookstoreapp.user.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -15,19 +15,17 @@ public class AccountService {
     private final UserRepo userRepo;
 
     public String setAccountDetails(String email, User user) {
-        Optional<User> userUpdate = userRepo.findByEmail(email);
-        if(userUpdate.isPresent()) {
-            userUpdate.get().setPhoneNumber(user.getPhoneNumber());
-            userUpdate.get().setAddress(user.getAddress());
-            userUpdate.get().setCity(user.getCity());
-            userUpdate.get().setCountry(user.getCountry());
-            userUpdate.get().setZipCode(user.getZipCode());
-            userUpdate.get().setState(user.getState());
-
-            userRepo.save(userUpdate.get());
+       return userRepo.findByEmail(email).map(userUpdate -> {
+           userUpdate.setFullName(user.getFullName());
+            userUpdate.setPhoneNumber(user.getPhoneNumber());
+            userUpdate.setAddress(user.getAddress());
+            userUpdate.setCity(user.getCity());
+            userUpdate.setCountry(user.getCountry());
+            userUpdate.setZipCode(user.getZipCode());
+            userUpdate.setState(user.getState());
+            userRepo.save(userUpdate);
             return  "Account"+email+"details updated successfully";
-        }
-        throw new UsernameNotFoundException("User not found");
+        }).orElseThrow();
     }
 
     public AccountResponse getAccountDetails(String email) {
@@ -35,11 +33,12 @@ public class AccountService {
                 .map(user -> new AccountResponse(
                         user.getFullName(),
                         user.getPhoneNumber(),
+                        user.getEmail(),
                         user.getAddress(),
                         user.getCity(),
-                        user.getCountry(),
+                        user.getState(),
                         user.getZipCode(),
-                        user.getState()
+                        user.getCountry()
                 )).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }
