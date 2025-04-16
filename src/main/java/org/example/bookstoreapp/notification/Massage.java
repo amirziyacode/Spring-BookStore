@@ -25,6 +25,7 @@ public class Massage {
     private String subject;
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "Massage")
     private String message;
 
     @CreationTimestamp
