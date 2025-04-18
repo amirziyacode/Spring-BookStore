@@ -30,24 +30,19 @@ public class NotificationService {
 
     public NotificationsResponse addMassage(Massage contact) {
         Optional<User> byEmail = userRepo.findByEmail(contact.getEmail());
-        if(byEmail.isPresent()) {
-           Massage buildContact = Massage.builder()
-                   .user(byEmail.get())
-                   .email(contact.getEmail())
-                   .fullName(contact.getFullName())
-                   .message(contact.getMessage())
-                   .subject(contact.getSubject())
-                   .createdAt(LocalDateTime.now())
-                   .status(Status.PENDING)
-                   .build();
-            notificationRepo.save(buildContact);
-           return  NotificationsResponse.builder()
-                   .massages("your massage has been added successfully")
-                   .createdAt(LocalDateTime.now())
-                   .build();
-       }
+        byEmail.stream().map(user -> Massage.builder()
+                .user(user)
+                .email(contact.getEmail())
+                .message(contact.getMessage())
+                .subject(contact.getSubject())
+                .status(Status.PENDING)
+                .fullName(contact.getFullName())
+                .createdAt(LocalDateTime.now())
+                .build()
+        ).forEach(notificationRepo::save);
+
         return  NotificationsResponse.builder()
-                .massages("you unavailable contact with this email")
+                .massages("your massage has been added successfully")
                 .createdAt(LocalDateTime.now())
                 .build();
     }
