@@ -27,6 +27,8 @@ public class Massage {
     @Basic(fetch = FetchType.LAZY)
     private String message;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @CreationTimestamp
     private LocalDateTime createdAt;
 

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.bookstoreapp.notification.Massage;
 import org.example.bookstoreapp.notification.NotificationsResponse;
+import org.example.bookstoreapp.notification.Status;
 import org.example.bookstoreapp.repository.NotificationRepo;
 import org.example.bookstoreapp.repository.UserRepo;
 import org.example.bookstoreapp.user.User;
@@ -37,6 +38,7 @@ public class NotificationService {
                    .message(contact.getMessage())
                    .subject(contact.getSubject())
                    .createdAt(LocalDateTime.now())
+                   .status(Status.PENDING)
                    .build();
             notificationRepo.save(buildContact);
            return  NotificationsResponse.builder()
@@ -48,5 +50,12 @@ public class NotificationService {
                 .massages("you unavailable contact with this email")
                 .createdAt(LocalDateTime.now())
                 .build();
+    }
+
+    public List<Massage> getAllMassages(String email) {
+     return notificationRepo.findAll()
+             .stream()
+             .filter(contractUser -> contractUser.getUser().getEmail().equals(email))
+             .toList();
     }
 }
