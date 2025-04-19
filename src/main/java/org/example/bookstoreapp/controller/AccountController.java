@@ -19,7 +19,6 @@ import java.util.List;
 public class AccountController {
 
     private final AccountService accountService;
-    private final NotificationService notificationService;
 
     @GetMapping("getAccount")
     public ResponseEntity<AccountResponse> getAccountDetails(@RequestParam String email){
@@ -29,10 +28,5 @@ public class AccountController {
     @PutMapping("setAccount")
     public ResponseEntity<String> accountDetails(@RequestParam String email, @RequestBody User user) {
         return  ResponseEntity.status(HttpStatus.OK).body(accountService.setAccountDetails(email,user));
-    }
-
-    @GetMapping("getMyMassages")
-    public ResponseEntity<List<Massage>> getMyMassages(@RequestParam String email){
-        return ResponseEntity.status(HttpStatus.OK).body(notificationService.getAllMassages(email));
     }
 }

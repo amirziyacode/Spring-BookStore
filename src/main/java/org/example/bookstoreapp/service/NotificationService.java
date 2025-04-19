@@ -23,11 +23,6 @@ public class NotificationService {
     private final NotificationRepo notificationRepo;
     private final UserRepo userRepo;
 
-   public List<Massage> findAllByUserId(int userId) {
-        List<Massage>  notifications =  notificationRepo.findAll();
-        return notifications.stream().filter(contractUser -> contractUser.getUser().getId() == userId).toList();
-    }
-
     public NotificationsResponse addMassage(Massage contact) {
         Optional<User> byEmail = userRepo.findByEmail(contact.getEmail());
         byEmail.stream().map(user -> Massage.builder()

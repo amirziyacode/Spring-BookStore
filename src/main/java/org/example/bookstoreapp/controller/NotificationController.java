@@ -14,16 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/contact")
 public class NotificationController {
-    private final NotificationService contactService;
-
-    @GetMapping("getMassage")
-    public ResponseEntity<List<Massage>> getMassage
-            (@RequestParam int userId) {
-        return ResponseEntity.ok().body(contactService.findAllByUserId(userId));
-    }
+    private final NotificationService notificationService;
 
     @PostMapping("addContact")
     public ResponseEntity<NotificationsResponse> addMassage(@RequestBody Massage massage) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(contactService.addMassage(massage));
+        return  ResponseEntity.status(HttpStatus.CREATED).body(notificationService.addMassage(massage));
+    }
+
+    @GetMapping("getMyMassages")
+    public ResponseEntity<List<Massage>> getMyMassages(@RequestParam String email){
+        return ResponseEntity.status(HttpStatus.OK).body(notificationService.getAllMassages(email));
     }
 }
