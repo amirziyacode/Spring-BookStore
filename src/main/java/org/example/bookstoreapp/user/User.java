@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.bookstoreapp.notification.Massage;
 import org.example.bookstoreapp.jwtToken.Token;
-import org.example.bookstoreapp.order.Order;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,9 +42,6 @@ public class User  implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Massage> contacts;
-
-    @OneToMany(mappedBy = "user")
-    private List<Order> books;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

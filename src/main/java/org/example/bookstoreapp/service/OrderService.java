@@ -1,6 +1,7 @@
 package org.example.bookstoreapp.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.bookstoreapp.order.Order;
 import org.example.bookstoreapp.order.OrderStatus;
 import org.example.bookstoreapp.repository.OrderRepo;
@@ -11,20 +12,21 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService {
     private final OrderRepo orderRepo;
     private final UserRepo userRepo;
 
     public Order save(String email, Order order) {
         return userRepo.findByEmail(email).map(user -> {
-            order.setUser(user);
+            order.setEmail(email);
             order.setData(LocalDateTime.now());
             order.setStatus(OrderStatus.PROCESSING);
             return orderRepo.save(order);
         }).orElseThrow(() -> new RuntimeException("User Not Fount !"));
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepo.findAll();
+    public List<Order> getAllOrders(String email) {
+        return orderRepo.findByEmail(email);
     }
 }
