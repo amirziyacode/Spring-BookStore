@@ -47,12 +47,12 @@ public class AuthenticationService {
                         , authenticationRequest.getPassword()
                 )
         );
-        User user = userRepo.findByEmail(authenticationRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        String token = jwtService.generateToken(user);
-        saveUserToken(token,user);
-        return AuthenticationResponse.builder()
-                .token(token)
-                .build();
+        userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
+            String token = jwtService.generateToken(user);
+            saveUserToken(token, user);
+            return AuthenticationResponse.builder().token(token).build();
+        });
+        throw new UsernameNotFoundException(authenticationRequest.getEmail() + " not found");
     }
 
     private void saveUserToken(String token, User user) {
