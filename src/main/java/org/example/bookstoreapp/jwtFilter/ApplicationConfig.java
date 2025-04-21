@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.config;
+package org.example.bookstoreapp.jwtFilter;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.repository.UserRepo;
