@@ -1,6 +1,5 @@
 package org.example.bookstoreapp.jwtToken;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +23,7 @@ public class Token {
     @Enumerated(EnumType.STRING)
     private TokenType tokenType;
 
-    private Boolean expired;
+    private Boolean revoked;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

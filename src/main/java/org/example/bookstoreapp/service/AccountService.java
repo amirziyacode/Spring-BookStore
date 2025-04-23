@@ -19,12 +19,12 @@ public class AccountService {
             userUpdate.setPhoneNumber(user.getPhoneNumber());
             userUpdate.setAddress(user.getAddress());
             userUpdate.setCity(user.getCity());
+           userUpdate.setState(user.getState());
             userUpdate.setCountry(user.getCountry());
             userUpdate.setZipCode(user.getZipCode());
-            userUpdate.setState(user.getState());
             userRepo.save(userUpdate);
             return  "Account "+email+"details updated successfully";
-        }).orElseThrow();
+        }).orElseThrow(() -> new RuntimeException("Account not found"));
     }
 
     public UserDTO getAccountDetails(String email) {

@@ -47,19 +47,19 @@ public class AuthenticationService {
                         , authenticationRequest.getPassword()
                 )
         );
-        userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
+       return userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
             String token = jwtService.generateToken(user);
             saveUserToken(token, user);
             return AuthenticationResponse.builder().token(token).build();
-        });
-        throw new UsernameNotFoundException(authenticationRequest.getEmail() + " not found");
+        })
+                .orElseThrow(() -> new UsernameNotFoundException("User"+authenticationRequest.getEmail()+"not found"));
     }
 
     private void saveUserToken(String token, User user) {
         Token buildToken = Token.builder()
                 .token(token)
                 .user(user)
-                .expired(false)
+                .revoked(false)
                 .tokenType(TokenType.BEARER)
                 .build();
         tokenRepo.save(buildToken);
