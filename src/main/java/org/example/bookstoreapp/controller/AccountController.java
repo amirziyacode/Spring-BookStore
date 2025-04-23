@@ -1,8 +1,8 @@
 package org.example.bookstoreapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.bookstoreapp.dto.UserDTO;
 import org.example.bookstoreapp.service.AccountService;
-import org.example.bookstoreapp.user.AccountResponse;
 import org.example.bookstoreapp.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class AccountController {
     private final AccountService accountService;
 
     @GetMapping("getAccount")
-    public ResponseEntity<AccountResponse> getAccountDetails(@RequestParam String email){
+    public ResponseEntity<UserDTO> getAccountDetails(@RequestParam String email){
         return ResponseEntity.status(HttpStatus.OK).body(accountService.getAccountDetails(email));
     }
 
