@@ -1,6 +1,5 @@
-package org.example.bookstoreapp.repository;
+package org.example.bookstoreapp.order;
 
-import org.example.bookstoreapp.order.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,6 +1,5 @@
-package org.example.bookstoreapp.repository;
+package org.example.bookstoreapp.user;
 
-import org.example.bookstoreapp.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,13 +1,9 @@
-package org.example.bookstoreapp.service;
+package org.example.bookstoreapp.notification;
 
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.bookstoreapp.notification.Massage;
-import org.example.bookstoreapp.notification.NotificationsResponse;
-import org.example.bookstoreapp.notification.Status;
-import org.example.bookstoreapp.repository.NotificationRepo;
-import org.example.bookstoreapp.repository.UserRepo;
+import org.example.bookstoreapp.user.UserRepo;
 import org.example.bookstoreapp.user.User;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package org.example.bookstoreapp.springData;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
 import org.example.bookstoreapp.book.Category;
-import org.example.bookstoreapp.repository.BookRepo;
+import org.example.bookstoreapp.book.BookRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

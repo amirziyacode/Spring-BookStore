@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.jwtFilter;
+package org.example.bookstoreapp.security;
 
 
 import io.jsonwebtoken.JwtException;
@@ -7,7 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.service.JwtService;
+import org.example.bookstoreapp.jwtToken.JwtService;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

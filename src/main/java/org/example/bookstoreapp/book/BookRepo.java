@@ -1,9 +1,7 @@
-package org.example.bookstoreapp.repository;
+package org.example.bookstoreapp.book;
 
 
 import lombok.NonNull;
-import org.example.bookstoreapp.book.Book;
-import org.example.bookstoreapp.book.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

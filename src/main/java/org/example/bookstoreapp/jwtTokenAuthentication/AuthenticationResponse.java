@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.jwtAuth;
+package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

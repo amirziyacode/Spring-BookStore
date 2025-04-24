@@ -1,13 +1,11 @@
-package org.example.bookstoreapp.service;
+package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.jwtAuth.AuthenticationRequest;
-import org.example.bookstoreapp.jwtAuth.AuthenticationResponse;
-import org.example.bookstoreapp.jwtAuth.RegisterRequest;
+import org.example.bookstoreapp.jwtToken.JwtService;
 import org.example.bookstoreapp.jwtToken.Token;
 import org.example.bookstoreapp.jwtToken.TokenType;
-import org.example.bookstoreapp.repository.TokenRepo;
-import org.example.bookstoreapp.repository.UserRepo;
+import org.example.bookstoreapp.jwtToken.TokenRepo;
+import org.example.bookstoreapp.user.UserRepo;
 import org.example.bookstoreapp.user.Role;
 import org.example.bookstoreapp.user.User;
 import org.springframework.security.authentication.AuthenticationManager;

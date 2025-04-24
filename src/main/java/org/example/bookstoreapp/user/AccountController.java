@@ -1,9 +1,7 @@
-package org.example.bookstoreapp.controller;
+package org.example.bookstoreapp.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.dto.UserDTO;
-import org.example.bookstoreapp.service.AccountService;
-import org.example.bookstoreapp.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,10 +1,6 @@
-package org.example.bookstoreapp.controller;
+package org.example.bookstoreapp.jwtTokenAuthentication;
 
 
-import org.example.bookstoreapp.jwtAuth.AuthenticationRequest;
-import org.example.bookstoreapp.jwtAuth.AuthenticationResponse;
-import org.example.bookstoreapp.jwtAuth.RegisterRequest;
-import org.example.bookstoreapp.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.jwtAuth;
+package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

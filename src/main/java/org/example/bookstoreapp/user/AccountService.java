@@ -1,10 +1,8 @@
-package org.example.bookstoreapp.service;
+package org.example.bookstoreapp.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.dto.UserDTO;
 import org.example.bookstoreapp.mapper.UserMapper;
-import org.example.bookstoreapp.repository.UserRepo;
-import org.example.bookstoreapp.user.User;
 import org.springframework.stereotype.Service;
 
 @Service

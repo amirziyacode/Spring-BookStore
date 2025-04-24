@@ -1,6 +1,5 @@
-package org.example.bookstoreapp.repository;
+package org.example.bookstoreapp.jwtToken;
 
-import org.example.bookstoreapp.jwtToken.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

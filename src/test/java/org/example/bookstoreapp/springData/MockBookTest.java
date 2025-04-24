@@ -1,6 +1,6 @@
 package org.example.bookstoreapp.springData;
 
-import org.example.bookstoreapp.repository.BookRepo;
+import org.example.bookstoreapp.book.BookRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

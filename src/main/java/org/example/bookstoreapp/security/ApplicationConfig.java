@@ -1,7 +1,7 @@
-package org.example.bookstoreapp.jwtFilter;
+package org.example.bookstoreapp.security;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.repository.UserRepo;
+import org.example.bookstoreapp.user.UserRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

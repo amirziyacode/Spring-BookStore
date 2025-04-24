@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.service;
+package org.example.bookstoreapp.jwtToken;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

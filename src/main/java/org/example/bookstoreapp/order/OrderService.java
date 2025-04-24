@@ -1,11 +1,8 @@
-package org.example.bookstoreapp.service;
+package org.example.bookstoreapp.order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.bookstoreapp.order.Order;
-import org.example.bookstoreapp.order.OrderStatus;
-import org.example.bookstoreapp.repository.OrderRepo;
-import org.example.bookstoreapp.repository.UserRepo;
+import org.example.bookstoreapp.user.UserRepo;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;

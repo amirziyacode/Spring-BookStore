@@ -1,8 +1,6 @@
-package org.example.bookstoreapp.controller;
+package org.example.bookstoreapp.order;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.order.Order;
-import org.example.bookstoreapp.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
