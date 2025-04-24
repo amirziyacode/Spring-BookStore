@@ -13,13 +13,13 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    @PostMapping("addOrder")
-    public ResponseEntity<Order> addOrder(@RequestParam String email, @RequestBody Order order) {
+    @PostMapping("addOrder/{email}")
+    public ResponseEntity<OrderResponse> addOrder(@PathVariable String email, @RequestBody Order order) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(email,order));
     }
 
-    @GetMapping("getAllOrders")
-    public ResponseEntity<List<Order>> getAllOrders(@RequestParam String email) {
+    @GetMapping("getAllOrders/{email}")
+    public ResponseEntity<List<Order>> getAllOrders(@PathVariable String email) {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllOrders(email));
     }
 }
