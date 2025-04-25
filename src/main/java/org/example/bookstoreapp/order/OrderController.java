@@ -1,6 +1,7 @@
 package org.example.bookstoreapp.order;
 
 import lombok.RequiredArgsConstructor;
+import org.example.bookstoreapp.dto.OrderDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("addOrder/{email}")
-    public ResponseEntity<OrderResponse> addOrder(@PathVariable String email, @RequestBody Order order) {
+    public ResponseEntity<OrderResponse> addOrder(@PathVariable String email, @RequestBody OrderDTO order) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(email,order));
     }
 
