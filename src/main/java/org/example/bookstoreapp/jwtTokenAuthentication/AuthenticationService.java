@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -24,18 +26,24 @@ public class AuthenticationService {
     private final TokenRepo tokenRepo;
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
-        User buildUser = User.builder()
-                .fullName(registerRequest.getFullName())
-                .email(registerRequest.getEmail())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(Role.USER)
-                .build();
-        userRepo.save(buildUser);
-        String token = jwtService.generateToken(buildUser);
-        saveUserToken(token, buildUser);
-        return AuthenticationResponse.builder()
-                        .token(token)
-                .build();
+        Optional<User> byEmail = userRepo.findByEmail(registerRequest.getEmail());
+
+        if(byEmail.isEmpty()) {
+            User buildUser = User.builder()
+                    .fullName(registerRequest.getFullName())
+                    .email(registerRequest.getEmail())
+                    .password(passwordEncoder.encode(registerRequest.getPassword()))
+                    .role(Role.USER)
+                    .build();
+            userRepo.save(buildUser);
+            String token = jwtService.generateToken(buildUser);
+            saveUserToken(token, buildUser);
+            return AuthenticationResponse.builder()
+                    .token(token)
+                    .build();
+        }else {
+            throw new UsernameNotFoundException("Email already in use");
+        }
     }
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
