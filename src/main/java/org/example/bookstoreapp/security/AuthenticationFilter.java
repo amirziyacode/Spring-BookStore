@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.jwtToken.JwtService;
+import org.example.bookstoreapp.jwtToken.TokenRepo;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 
 @Component
@@ -25,6 +25,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final TokenRepo tokenRepo;
 
     @Override
     protected void doFilterInternal(
@@ -43,7 +44,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             email = jwtService.extractUsername(jwt);
             if(email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-                if(jwtService.isTokenValid(jwt, userDetails)) {
+                var byToken = tokenRepo.findByToken(jwt)
+                        .map(t -> !t.getRevoked())
+                        .orElse(null);
+                if(jwtService.isTokenValid(jwt, userDetails) && Boolean.TRUE.equals(byToken)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities()
                     );

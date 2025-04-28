@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,7 @@ public class AuthenticationService {
                     .build();
             userRepo.save(buildUser);
             String token = jwtService.generateToken(buildUser);
+            revokeAllUserTokens(buildUser);
             saveUserToken(token, buildUser);
             return AuthenticationResponse.builder()
                     .token(token)
@@ -59,6 +61,18 @@ public class AuthenticationService {
             return AuthenticationResponse.builder().token(token).build();
         })
                 .orElseThrow(() -> new UsernameNotFoundException("User"+authenticationRequest.getEmail()+"not found"));
+    }
+
+    private void revokeAllUserTokens(User user) {
+        List<Token> allValidTokensByUser = tokenRepo.findAllValidTokensByUser(user.getId());
+        if(allValidTokensByUser.isEmpty()) {
+            return;
+        }
+        allValidTokensByUser.forEach(token -> {
+            token.setRevoked(true);
+        });
+        tokenRepo.saveAll(allValidTokensByUser);
+
     }
 
     private void saveUserToken(String token, User user) {
