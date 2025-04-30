@@ -5,15 +5,11 @@ package org.example.bookstoreapp.mapper;
 import org.assertj.core.api.Assertions;
 import org.example.bookstoreapp.dto.UserDTO;
 import org.example.bookstoreapp.user.User;
-import org.example.bookstoreapp.user.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -24,8 +20,6 @@ class UserMapperImpTest {
     private UserMapperImp userMapper;
 
 
-    @Mock
-    private UserRepo userRepo;
 
     @Test
     void give_user_to_userDTO() {
@@ -41,9 +35,8 @@ class UserMapperImpTest {
                 .zipCode(10001)
                 .build();
 
-        when(userRepo.findByEmail(email)).thenReturn(Optional.of(mockUser));
 
-        UserDTO result = userMapper.UserToUserDTO(email);
+        UserDTO result = userMapper.UserToUserDTO(mockUser);
 
         assertNotNull(result);
         assertEquals(mockUser.getFullName(), result.getName());
@@ -55,14 +48,12 @@ class UserMapperImpTest {
         assertEquals(mockUser.getState(), result.getState());
         assertEquals(mockUser.getZipCode(), result.getZipCode());
 
-        verify(userRepo,times(1)).findByEmail(email);
     }
 
     @Test
     void user_not_found() {
-        // replace lambda  () - > { userMapper.UserToUserDTO(email) }
-        RuntimeException fakeEmail = assertThrows(RuntimeException.class, this::execute);
-        Assertions.assertThat(fakeEmail.getMessage()).isEqualTo("User not found");
+        RuntimeException fakeEmail = assertThrows(RuntimeException.class, () -> userMapper.UserToUserDTO(null));
+        Assertions.assertThat(fakeEmail.getMessage()).isEqualTo("User Not Found");
     }
 
     @Test
@@ -87,9 +78,5 @@ class UserMapperImpTest {
         Assertions.assertThat(userDto.getPhone()).isEqualTo(user.getPhoneNumber());
         Assertions.assertThat(userDto.getZipCode()).isEqualTo(user.getZipCode());
 
-    }
-
-    private void execute() {
-        userMapper.UserToUserDTO("fakeEmail");
     }
 }
