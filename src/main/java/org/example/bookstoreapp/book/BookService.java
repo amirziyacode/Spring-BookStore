@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +22,14 @@ public class BookService {
         Pageable pageable = PageRequest.of(pageNumber,perPage);
         return bookRepo.findAll(pageable);
     }
+
     public List<Book> findByCategory(String category) {
-        for(Category cat:Category.values()){
-            if(String.valueOf(cat).equals(category.toUpperCase())){
-                return bookRepo.findByCategory(cat).orElse(null);
-            }
+        try {
+            Category cat = Category.valueOf(category.toUpperCase());
+            return bookRepo.findByCategory(cat).orElse(Collections.emptyList());
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalArgumentException("Invalid category: " + category);
         }
-        throw new IllegalArgumentException("No book found for category " + category);
     }
 
     public Book findById(int id) {
