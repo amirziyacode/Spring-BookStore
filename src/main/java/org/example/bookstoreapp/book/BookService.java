@@ -39,6 +39,7 @@ public class BookService {
     }
 
     public List<Book> findBestSeller(int books) {
+        // integer for books it means : how many books comes from database
        return bookRepo.findAll().stream().filter(Book::isBestseller).limit(books).collect(Collectors.toList());
     }
 }
