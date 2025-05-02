@@ -1,6 +1,6 @@
 package org.example.bookstoreapp.book;
 
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -76,7 +76,7 @@ class BookServiceTest {
     @Test
     void find_by_category_throw_exception(){
         IllegalArgumentException category = assertThrows(IllegalArgumentException.class, () -> bookService.findByCategory("category"));
-        assertEquals("No book found for category category", category.getMessage());
+        assertEquals("Invalid category: category", category.getMessage());
     }
     @Test
     void find_by_category(){

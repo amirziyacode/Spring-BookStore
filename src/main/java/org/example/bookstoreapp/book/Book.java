@@ -29,6 +29,7 @@ public class Book {
     private String isbn;
     private double rating;
     private int paperback;
+    @Column(name = "publication_year")
     private int year;
     private  String publisher;
     private String language;
