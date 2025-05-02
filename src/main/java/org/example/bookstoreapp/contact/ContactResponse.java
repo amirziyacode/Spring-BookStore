@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.notification;
+package org.example.bookstoreapp.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class NotificationsResponse {
+public class ContactResponse {
 
     @JsonProperty("Massage")
     private String massages;

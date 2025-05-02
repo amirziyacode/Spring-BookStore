@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.notification;
+package org.example.bookstoreapp.contact;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "_massage")
-public class Massage {
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Massage {
     private String message;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private ContactStatus status;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
