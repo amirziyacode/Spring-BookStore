@@ -5,6 +5,7 @@ import org.example.bookstoreapp.dto.UserDTO;
 import org.example.bookstoreapp.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class AccountService {
@@ -26,6 +27,6 @@ public class AccountService {
     }
 
     public UserDTO getAccountDetails(String email) {
-        return userMapper.UserToUserDTO(email);
+        return userMapper.UserToUserDTO(userRepo.findByEmail(email).orElse(null));
     }
 }

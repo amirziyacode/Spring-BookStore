@@ -5,6 +5,6 @@ import org.example.bookstoreapp.user.User;
 
 
 public interface UserMapper {
-    UserDTO UserToUserDTO(String emailUser);
+    UserDTO UserToUserDTO(User user);
     User UserDtoToUser(UserDTO userDTO);
 }

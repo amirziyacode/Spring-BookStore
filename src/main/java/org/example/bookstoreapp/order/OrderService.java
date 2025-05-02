@@ -15,20 +15,21 @@ import java.util.List;
 public class OrderService {
     private final OrderRepo orderRepo;
     private final UserRepo userRepo;
-    private final   OrderMapper orderMapper;
+    private final OrderMapper orderMapper;
 
-    public OrderResponse save(String email, OrderDTO order) {
+    public OrderMassage save(String email, OrderDTO order) {
         return userRepo.findByEmail(email).map(user -> {
             Order toOrder = orderMapper.OrderDTOToOrder(order);
             toOrder.setEmail(email);
             orderRepo.save(toOrder);
-            return OrderResponse.builder()
+            return OrderMassage.builder()
                     .massage(LocalDate.now() +"  Order has been processed from this email : " + email +" Please be patient.")
                     .build();
         }).orElseThrow(() -> new RuntimeException("User Not Fount !"));
     }
 
-    public List<Order> getAllOrders(String email) {
-        return orderRepo.findByEmail(email);
+    public List<org.example.bookstoreapp.dto.OrderResponse> getAllOrders(String email) {
+        List<Order> byEmail = orderRepo.findByEmail(email);
+        return orderMapper.OrderToOrderResponse(byEmail);
     }
 }

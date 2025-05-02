@@ -2,6 +2,7 @@ package org.example.bookstoreapp.order;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.dto.OrderDTO;
+import org.example.bookstoreapp.dto.OrderResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,12 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("addOrder/{email}")
-    public ResponseEntity<OrderResponse> addOrder(@PathVariable String email, @RequestBody OrderDTO order) {
+    public ResponseEntity<OrderMassage> addOrder(@PathVariable String email, @RequestBody OrderDTO order) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(email,order));
     }
 
     @GetMapping("getAllOrders/{email}")
-    public ResponseEntity<List<Order>> getAllOrders(@PathVariable String email) {
+    public ResponseEntity<List<OrderResponse>> getAllOrders(@PathVariable String email) {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllOrders(email));
     }
 }

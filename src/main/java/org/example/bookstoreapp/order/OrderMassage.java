@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderResponse {
+public class OrderMassage {
     @JsonProperty("Massage_Order")
     private String massage;
 }

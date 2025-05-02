@@ -3,7 +3,6 @@ package org.example.bookstoreapp.mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.bookstoreapp.dto.UserDTO;
-import org.example.bookstoreapp.user.UserRepo;
 import org.example.bookstoreapp.user.User;
 import org.springframework.stereotype.Component;
 
@@ -12,25 +11,22 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class UserMapperImp implements UserMapper {
 
-    private final UserRepo userRepo;
-
 
     @Override
-    public UserDTO UserToUserDTO(String emailUser) {
-        return userRepo.findByEmail(emailUser)
-                .map(usr -> {
-                    UserDTO userDTO = new UserDTO();
-                    userDTO.setName(usr.getFullName());
-                    userDTO.setEmail(usr.getEmail());
-                    userDTO.setCity(usr.getCity());
-                    userDTO.setCountry(usr.getCountry());
-                    userDTO.setAddress(usr.getAddress());
-                    userDTO.setPhone(usr.getPhoneNumber());
-                    userDTO.setState(usr.getState());
-                    userDTO.setZipCode(usr.getZipCode());
-                    return userDTO;
-                })
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public UserDTO UserToUserDTO(User user) {
+        if (user == null) {
+            throw new RuntimeException("User Not Found");
+        }
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(user.getFullName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setCity(user.getCity());
+        userDTO.setCountry(user.getCountry());
+        userDTO.setAddress(user.getAddress());
+        userDTO.setPhone(user.getPhoneNumber());
+        userDTO.setState(user.getState());
+        userDTO.setZipCode(user.getZipCode());
+        return userDTO;
     }
 
     @Override
