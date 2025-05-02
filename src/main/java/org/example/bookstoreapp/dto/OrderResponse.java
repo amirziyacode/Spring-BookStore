@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.example.bookstoreapp.order.OrderItem;
 import org.example.bookstoreapp.order.OrderStatus;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,4 +23,5 @@ public class OrderResponse {
     private double tax;
     private double total;
     private OrderStatus status;
+    private LocalDate date;
 }

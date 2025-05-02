@@ -6,6 +6,8 @@ import org.example.bookstoreapp.dto.OrderResponse;
 import org.example.bookstoreapp.order.Order;
 import org.example.bookstoreapp.order.OrderStatus;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,6 +43,7 @@ public class OrderMapperImpl implements OrderMapper {
                 .total(order.getTotal())
                 .email(order.getEmail())
                 .status(order.getStatus())
+                .date(LocalDate.now())
                 .build();
     }
 
