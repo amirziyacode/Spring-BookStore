@@ -3,6 +3,9 @@ package org.example.bookstoreapp.contact;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.bookstoreapp.dto.ContactDTO;
+import org.example.bookstoreapp.mapper.ContactMapper;
+import org.example.bookstoreapp.mapper.ContactMapperImpl;
 import org.example.bookstoreapp.notification.Notification;
 import org.example.bookstoreapp.notification.NotificationService;
 import org.example.bookstoreapp.notification.NotificationStatus;
@@ -23,19 +26,28 @@ public class ContactService {
     private final UserRepo userRepo;
     private final NotificationService notificationService;
 
-    public ContactResponse addMassage(Contact contact) {
+    public ContactResponse addMassage(ContactDTO contact) {
         Optional<User> byEmail = userRepo.findByEmail(contact.getEmail());
-        byEmail.stream().map(user -> Contact.builder()
-                .user(user)
-                .email(contact.getEmail())
-                .message(contact.getMessage())
-                .subject(contact.getSubject())
-                .status(ContactStatus.PENDING)
-                .fullName(contact.getFullName())
-                .createdAt(LocalDateTime.now())
-                .build()
-        ).forEach(contactRepo::save);
 
+        if(byEmail.isPresent()) {
+            saveContact(contact, byEmail.get());
+            createNotification(contact, byEmail);
+            return  ContactResponse.builder()
+                    .massages("your massage has been added successfully")
+                    .createdAt(LocalDateTime.now())
+                    .build();
+        }
+
+        throw new RuntimeException("User not found");
+    }
+
+    protected void saveContact(ContactDTO contact, User byEmail) {
+        ContactMapper contactMapper = new ContactMapperImpl();
+        Contact buildContact = contactMapper.contactDtoToContact(contact, byEmail);
+        contactRepo.save(buildContact);
+    }
+
+    private void createNotification(ContactDTO contact, Optional<User> byEmail) {
         notificationService.createNotification(Notification.builder()
                         .date(LocalDateTime.now())
                         .type(NotificationStatus.PROMOTION)
@@ -43,17 +55,10 @@ public class ContactService {
                         .message("You have add massage to your contact")
                         .title(contact.getSubject())
                 .build());
-
-        return  ContactResponse.builder()
-                .massages("your massage has been added successfully")
-                .createdAt(LocalDateTime.now())
-                .build();
     }
 
-    public List<Contact> getAllMassages(String email) {
-     return contactRepo.findAll()
-             .stream()
-             .filter(contractUser -> contractUser.getUser().getEmail().equals(email))
-             .toList();
+    public List<ContactDTO> getAllMassages(String email) {
+        ContactMapper contactMapper = new ContactMapperImpl();
+        return contactMapper.contactToContactDTOList(contactRepo.findByUserEmail(email).orElseThrow(()-> new RuntimeException("Not found contact for this email")));
     }
 }
