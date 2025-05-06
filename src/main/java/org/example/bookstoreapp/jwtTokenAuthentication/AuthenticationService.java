@@ -68,9 +68,7 @@ public class AuthenticationService {
         if(allValidTokensByUser.isEmpty()) {
             return;
         }
-        allValidTokensByUser.forEach(token -> {
-            token.setRevoked(true);
-        });
+        allValidTokensByUser.forEach(token -> token.setRevoked(true));
         tokenRepo.saveAll(allValidTokensByUser);
 
     }
