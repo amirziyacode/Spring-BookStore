@@ -25,6 +25,7 @@ public class ContactService {
     private final ContactRepo contactRepo;
     private final UserRepo userRepo;
     private final NotificationService notificationService;
+    private final ContactMapper contactMapper = new ContactMapperImpl();
 
     public ContactResponse addMassage(ContactDTO contact) {
         Optional<User> byEmail = userRepo.findByEmail(contact.getEmail());
@@ -42,7 +43,6 @@ public class ContactService {
     }
 
     protected void saveContact(ContactDTO contact, User byEmail) {
-        ContactMapper contactMapper = new ContactMapperImpl();
         Contact buildContact = contactMapper.contactDtoToContact(contact, byEmail);
         contactRepo.save(buildContact);
     }
@@ -58,7 +58,6 @@ public class ContactService {
     }
 
     public List<ContactDTO> getAllMassages(String email) {
-        ContactMapper contactMapper = new ContactMapperImpl();
         return contactMapper.contactToContactDTOList(contactRepo.findByUserEmail(email).orElseThrow(()-> new RuntimeException("Not found contact for this email")));
     }
 }
