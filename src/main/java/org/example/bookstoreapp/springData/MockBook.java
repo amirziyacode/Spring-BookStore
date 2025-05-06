@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class MockBook implements CommandLineRunner {
@@ -338,21 +340,49 @@ public class MockBook implements CommandLineRunner {
                             "Every law, though, has one thing in common: an interest in total domination. In a bold and arresting two-color package, " +
                             "The 48 Laws of Power is ideal whether your aim is conquest, self-defense, or simply to understand the rules of the game.")
                     .build();
-            bookRepo.save(grokAlgo);
-            bookRepo.save(grokBitcoin);
-            bookRepo.save(grokAi);
-            bookRepo.save(cleanCode);
-            bookRepo.save(rustAction);
-            bookRepo.save(cryptoEngineers);
-            bookRepo.save(springAction);
-            bookRepo.save(cleanArchitecture);
-            bookRepo.save(friends);
-            bookRepo.save(atomic);
-            bookRepo.save(hurt);
-            bookRepo.save(deepWork);
-            bookRepo.save(theEffectiveProductDesigner);
-            bookRepo.save(webAppSecurity);
-            bookRepo.save(lawOfPower);
+            Book junitJava = Book.builder()
+                    .title("Java Unit Testing with JUnit 5")
+                    .author("Shekhar Gulati, Rahul Sharma")
+                    .paperback(158)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .year(2017)
+                    .language("English")
+                    .publisher("Apress")
+                    .price(50.91)
+                    .discount(10)
+                    .rating(4.5)
+                    .isbn("9781484230145")
+                    .coverImage("https://skybooks.ir/images/productImages/Java-Unit-Testing-with-JUnit-5_P31705682385.jpg")
+                    .description("Test Driven Development with JUnit 5 Explore the new way of building and maintaining test cases with Java test driven development (TDD) using JUnit 5. This book doesn't just talk about the new concepts, it shows you ways of applying them in TDD and Java 8 to continuously deliver code that excels in all metrics." +
+                            "Unit testing and test driven development have now become part of every developer's skill set. For Java developers, the most popular testing tool has been JUnit, and JUnit 5 is built using the latest features of Java.  With Java Unit Testing with JUnit 5, you'll master these new features, including method parameters, extensions, assertions and assumptions, and dynamic tests. You'll also see how to write clean tests with less code. \n" +
+                            "This book is a departure from using older practices and presents new ways of performing tests, building assertions, and injecting dependencies. ")
+                    .build();
+            Book javaAvoid = Book.builder()
+                    .title("100 Java Mistakes and How to Avoid Them")
+                    .author("Tagir Valeev")
+                    .paperback(353)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .language("English")
+                    .publisher("Manning")
+                    .price(45.5)
+                    .discount(5)
+                    .rating(4.8)
+                    .year(2024)
+                    .isNew(true)
+                    .isbn("9781633437968")
+                    .coverImage("https://skybooks.ir/images/productImages/100-Java-Mistakes-and-How-to-Avoid-Them_F71713620446.jpg")
+                    .description("Whenever you make a mistake writing Java, it’s almost guaranteed that someone else has made it before! " +
+                            "In 100 Java Mistakes and How To Avoid Them you’ll learn about the common and the not-so-common antipatterns, errors, and tricky bits that trip up almost every Java developer."+
+                            "Inside 100 Java Mistakes and How To Avoid Them you will learn how to:" +
+                            "Write better Java programs\n" +
+                            "Recognize common mistakes during programming\n" +
+                            "Create fewer bugs and save time for debugging and testing\n" +
+                            "Get help from static analyzers during programming\n" +
+                            "Configure static analysis tools to reduce the number of false reports\n" +
+                            "Extend static analysis tools with custom plugins")
+                    .build();
+            bookRepo.saveAll(List.of(grokAlgo,grokBitcoin,grokAi,cleanCode,cleanArchitecture,springAction,friends,rustAction,cryptoEngineers,atomic,hurt,deepWork
+            ,theEffectiveProductDesigner,webAppSecurity,lawOfPower,junitJava,javaAvoid));
         }
     }
 }
