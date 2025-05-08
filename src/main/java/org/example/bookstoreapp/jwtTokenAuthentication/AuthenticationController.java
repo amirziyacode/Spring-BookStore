@@ -1,18 +1,16 @@
 package org.example.bookstoreapp.jwtTokenAuthentication;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin("http://localhost:3000")
+@RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
-
-    public AuthenticationController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
-    }
 
     @PostMapping("register")
     public ResponseEntity<AuthenticationResponse>  register(@RequestBody RegisterRequest request) {
