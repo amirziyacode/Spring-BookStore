@@ -61,7 +61,6 @@ class JwtServiceTest {
         UserDetails userDetails = mock(UserDetails.class);
         when(userDetails.getUsername()).thenReturn("amirali");
 
-//        ReflectionTestUtils.setField(jwtService,"jwtExpiration",1); // 1seconde
         String token = jwtService.generateToken(userDetails);
 
         Thread.sleep(3000); // let expired

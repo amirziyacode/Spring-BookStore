@@ -1,0 +1,150 @@
+package org.example.bookstoreapp.jwtTokenAuthentication;
+
+import org.assertj.core.api.Assertions;
+import org.example.bookstoreapp.jwtToken.JwtService;
+import org.example.bookstoreapp.jwtToken.Token;
+import org.example.bookstoreapp.jwtToken.TokenRepo;
+import org.example.bookstoreapp.user.User;
+import org.example.bookstoreapp.user.UserRepo;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(SpringExtension.class)
+class AuthenticationServiceTest {
+
+    @Mock private UserRepo userRepo;
+    @Mock private PasswordEncoder passwordEncoder;
+    @Mock private JwtService jwtService;
+    @Mock private AuthenticationManager authenticationManager;
+    @Mock private TokenRepo tokenRepo;
+
+    @InjectMocks
+    private AuthenticationService authenticationService;
+
+    @Test
+    void should_register_a_user_and_generateToken() {
+
+        RegisterRequest request = RegisterRequest.builder()
+                .fullName("John Doe")
+                .email("john@example.com")
+                .password("password123")
+                .build();
+
+
+
+        when(userRepo.findByEmail(request.getEmail())).thenReturn(Optional.empty());
+        when(passwordEncoder.encode(request.getPassword())).thenReturn("encodedPassword");
+        when(jwtService.generateToken(any(User.class))).thenReturn("mocked-jwt-token");
+
+
+        AuthenticationResponse response = authenticationService.register(request);
+
+        assertNotNull(response);
+        assertEquals("mocked-jwt-token", response.getToken());
+        verify(userRepo).save(any(User.class));
+        verify(tokenRepo).save(any(Token.class));
+    }
+
+    @Test
+    @DisplayName("revoke_all_tokens")
+    void should_register_user_and_revoke_all_token_already_excite(){
+
+    RegisterRequest request = RegisterRequest.builder()
+            .fullName("John Doe")
+            .email("john@example.com")
+            .password("password123")
+            .build();
+    User user = User.builder()
+                .fullName("John Doe")
+                .email("john@example.com")
+                .password("password123")
+                .build();
+
+        Token mockToken = Token.builder()
+                .revoked(false)
+                .user(user)
+                .token("mocked-jwt-token")
+                .build();
+
+        when(tokenRepo.findAllValidTokensByUser(user.getId())).thenReturn(List.of(mockToken));
+        when(userRepo.findByEmail(user.getEmail())).thenReturn(Optional.empty());
+        when(jwtService.generateToken(any(User.class))).thenReturn("mocked-jwt-token");
+
+        AuthenticationResponse response = authenticationService.register(request);
+
+        assertNotNull(response);
+        assertEquals("mocked-jwt-token", response.getToken());
+        verify(userRepo).save(any(User.class));
+        verify(tokenRepo).save(any(Token.class));
+
+    }
+
+
+    @Test
+    void should_register_user_and_email_excite(){
+        RegisterRequest request = RegisterRequest.builder()
+                .fullName("John Doe")
+                .email("john@example.com")
+                .password("password123")
+                .build();
+
+        User user = User.builder()
+                .fullName("John Doe")
+                .email("john@example.com")
+                .password("password123")
+                .build();
+
+        when(userRepo.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
+
+        UsernameNotFoundException usernameNotFoundException = assertThrows(UsernameNotFoundException.class, () -> authenticationService.register(request));
+        assertThat(usernameNotFoundException.getMessage()).isEqualTo("Email already in use");
+    }
+
+    @Test
+    void should_login_with_email_and_password_generate_token() {
+
+        String email = "test@example.com";
+        String password = "password";
+        String token = "jwt-token";
+
+        AuthenticationRequest request = new AuthenticationRequest(email, password);
+        User user = User.builder()
+                .email(email)
+                .build();
+
+        when(userRepo.findByEmail(email)).thenReturn(Optional.of(user));
+        when(jwtService.generateToken(user)).thenReturn(token);
+
+        AuthenticationResponse response = authenticationService.login(request);
+
+        assertNotNull(response);
+        assertEquals(token, response.getToken());
+        verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
+        verify(jwtService).generateToken(user);
+    }
+
+    @Test
+    void should_login_with_email_and_password_user_not_found() {
+        String email = "test@example.com";
+        String password = "password";
+        AuthenticationRequest request = new AuthenticationRequest(email, password);
+        UsernameNotFoundException usernameNotFoundException = assertThrows(UsernameNotFoundException.class, () -> authenticationService.login(request));
+        Assertions.assertThat(usernameNotFoundException.getMessage()).isEqualTo("User"+request.getEmail()+"not found");
+
+    }
+}
