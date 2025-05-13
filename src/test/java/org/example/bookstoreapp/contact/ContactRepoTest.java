@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @DataJpaTest
 class ContactRepoTest {
@@ -25,7 +26,7 @@ class ContactRepoTest {
                 .email("email")
                 .fullName("John Doe")
                 .build();
-        Mockito.when(contactRepo.findByUserEmail("email")).thenReturn(Optional.of(List.of(mockContact)));
+        when(contactRepo.findByUserEmail("email")).thenReturn(Optional.of(List.of(mockContact)));
 
         Optional<List<Contact>> email = contactRepo.findByUserEmail("email");
 
