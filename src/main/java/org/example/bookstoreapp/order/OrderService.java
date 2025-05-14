@@ -23,7 +23,7 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final NotificationService notificationService;
 
-    public OrderMassage save(String email, OrderDTO order) {
+    public OrderMassage addOrder(String email, OrderDTO order) {
         return userRepo.findByEmail(email).map(user -> {
             Order toOrder = orderMapper.OrderDTOToOrder(order);
             toOrder.setEmail(email);
