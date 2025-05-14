@@ -21,7 +21,10 @@ public class NotificationService {
         if(notificationRepo.findByEmail(email).isEmpty()){
             throw new RuntimeException("You dont have any notifications");
         }
-        notificationRepo.findByEmail(email).stream().filter(notification -> notification.getId() == id).forEach(notificationRepo::delete);
+        notificationRepo.findByEmail(email)
+                .stream()
+                .filter(notification -> notification.getId() == id)
+                .forEach(notificationRepo::delete);
         return getAllNotificationsByEmail(email);
     }
 
