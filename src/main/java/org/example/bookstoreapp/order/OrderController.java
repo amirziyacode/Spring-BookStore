@@ -17,7 +17,7 @@ public class OrderController {
 
     @PostMapping("addOrder/{email}")
     public ResponseEntity<OrderMassage> addOrder(@PathVariable String email, @RequestBody OrderDTO order) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(email,order));
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.addOrder(email,order));
     }
 
     @GetMapping("getAllOrders/{email}")
