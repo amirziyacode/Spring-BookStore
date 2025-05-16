@@ -19,7 +19,7 @@ public class AccountController {
     }
 
     @PutMapping("setAccount")
-    public ResponseEntity<String> accountDetails(@RequestParam String email, @RequestBody User user) {
-        return  ResponseEntity.status(HttpStatus.OK).body(accountService.setAccountDetails(email,user));
+    public ResponseEntity<String> accountDetails(@RequestParam String email, @RequestBody UserDTO userDTO) {
+        return  ResponseEntity.status(HttpStatus.OK).body(accountService.setAccountDetails(email,userDTO));
     }
 }
