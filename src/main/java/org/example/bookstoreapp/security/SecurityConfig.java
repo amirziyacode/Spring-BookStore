@@ -32,8 +32,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("api/book/**","/api/auth/**","api/ai/ask-bot").permitAll()
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("api/book/**","/api/auth/**","api/ai/ask-bot")
+                        .permitAll()
                         .anyRequest().authenticated())
+
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> {

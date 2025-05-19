@@ -11,6 +11,8 @@ public class AuthenticationResponse {
 
     @JsonProperty("access_token")
     private String token;
+    private String message;
+    private boolean isAdmin;
 }
 
 

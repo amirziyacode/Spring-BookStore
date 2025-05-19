@@ -40,4 +40,8 @@ public class BookService {
     public List<Book> findBestSeller(int books) {
         return bookRepo.findAll().stream().filter(Book::isBestseller).limit(books).collect(Collectors.toList());
     }
+
+    public List<Book> allBooks() {
+        return bookRepo.findAll();
+    }
 }

@@ -55,7 +55,19 @@ public class AuthenticationService {
                         , authenticationRequest.getPassword()
                 )
         );
-       return userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
+
+        // Admin panel
+        Optional<User> userEmail = userRepo.findByEmail(authenticationRequest.getEmail())
+                .filter(user -> user
+                        .getRole()
+                        .equals(Role.USER));
+        if(userEmail.isPresent()) {
+            return AuthenticationResponse.builder()
+                    .message("Welcome Back Admin !!")
+                    .isAdmin(true)
+                    .build();
+        }
+        return userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
             String token = jwtService.generateToken(user);
             saveUserToken(token, user);
             return AuthenticationResponse.builder().token(token).build();

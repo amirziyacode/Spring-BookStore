@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -40,5 +40,11 @@ public class BookController {
     @GetMapping("findBestSeller")
     public ResponseEntity<List<Book>> getBestSeller(@RequestParam int books) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findBestSeller(books));
+    }
+
+    @GetMapping("allBooks")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.allBooks());
     }
 }
