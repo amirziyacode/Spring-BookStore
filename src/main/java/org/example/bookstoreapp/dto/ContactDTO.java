@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactDTO {
+    private String id;
     private String fullName;
     private String email;
     private String subject;
-    private String massage;
+    private String message;
     private ContactStatus status;
     private LocalDateTime createdAt;
 }

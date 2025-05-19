@@ -21,7 +21,7 @@ public class ContactMapperImpl implements ContactMapper {
                 .user(user)
                 .status(ContactStatus.PENDING)
                 .createdAt(LocalDateTime.now())
-                .message(contactDto.getMassage())
+                .message(contactDto.getMessage())
                 .build();
     }
 
@@ -32,10 +32,11 @@ public class ContactMapperImpl implements ContactMapper {
 
     private ContactDTO contactToContactDTO(Contact contact) {
       return ContactDTO.builder()
+              .id(String.valueOf(contact.getId()))
               .fullName(contact.getFullName())
               .email(contact.getEmail())
               .subject(contact.getSubject())
-              .massage(contact.getMessage())
+              .message(contact.getMessage())
               .status(contact.getStatus())
               .createdAt(contact.getCreatedAt())
               .build();

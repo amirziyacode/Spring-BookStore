@@ -51,7 +51,7 @@ class ContactServiceTest {
 
         mockContactDTO = ContactDTO.builder()
                 .subject("Order")
-                .massage("Hello World")
+                .message("Hello World")
                 .email("email")
                 .fullName("John Doe")
                 .build();
@@ -112,7 +112,7 @@ class ContactServiceTest {
 
         assertThat(result).isNotNull();
         assertThat(result.orElseThrow()).hasSize(1);
-        assertThat(contactDTOS.get(0).getMassage()).isEqualTo(contacts.get(0).getMessage());
+        assertThat(contactDTOS.get(0).getMessage()).isEqualTo(contacts.get(0).getMessage());
         assertThat(result.get()).containsExactly(mockContact);
     }
 

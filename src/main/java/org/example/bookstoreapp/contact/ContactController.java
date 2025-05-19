@@ -13,16 +13,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/contact")
 public class ContactController {
-    private final ContactService notificationService;
+    private final ContactService contactService;
 
     @PostMapping("addContact")
     public ResponseEntity<ContactResponse> addMassage(@RequestBody ContactDTO massage) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(notificationService.addMassage(massage));
+        return  ResponseEntity.status(HttpStatus.CREATED).body(contactService.addMassage(massage));
     }
 
     @GetMapping("getMyMassages")
     @Transactional
     public ResponseEntity<List<ContactDTO>> getMyMassages(@RequestParam String email){
-        return ResponseEntity.status(HttpStatus.OK).body(notificationService.getAllMassages(email));
+        return ResponseEntity.status(HttpStatus.OK).body(contactService.getAllMassages(email));
     }
 }

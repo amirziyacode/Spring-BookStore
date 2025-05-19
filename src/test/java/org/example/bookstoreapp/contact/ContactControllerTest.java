@@ -39,7 +39,7 @@ class ContactControllerTest {
     void setUp() {
         mockContact = ContactDTO.builder()
                 .subject("Order")
-                .massage("Hello World")
+                .message("Hello World")
                 .email("email")
                 .status(ContactStatus.PENDING)
                 .fullName("John Doe")
@@ -72,7 +72,7 @@ class ContactControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].fullName").value(mockContact.getFullName()))
-                .andExpect(jsonPath("[0].massage").value(mockContact.getMassage()))
+                .andExpect(jsonPath("[0].message").value(mockContact.getMessage()))
                 .andExpect(jsonPath("[0].subject").value(mockContact.getSubject()))
                 .andExpect(jsonPath("[0].status").value(String.valueOf(ContactStatus.PENDING)))
                 .andExpect(jsonPath("[0].email").value(mockContact.getEmail()));

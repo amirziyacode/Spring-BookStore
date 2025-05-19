@@ -21,7 +21,7 @@ class ContactMapperImplTest {
         contactMapper = new ContactMapperImpl();
         contactDTO = ContactDTO.builder()
                 .subject("Order")
-                .massage("Hello World")
+                .message("Hello World")
                 .email("email")
                 .fullName("John Doe")
                 .build();
@@ -44,7 +44,7 @@ class ContactMapperImplTest {
         assertThat(contact.getSubject()).isEqualTo(contactDTO.getSubject());
         assertThat(contact.getFullName()).isEqualTo(contactDTO.getFullName());
         assertThat(contact.getEmail()).isEqualTo(contactDTO.getEmail());
-        assertThat(contact.getMessage()).isEqualTo(contactDTO.getMassage());
+        assertThat(contact.getMessage()).isEqualTo(contactDTO.getMessage());
         assertThat(contact.getFullName()).isEqualTo(contactDTO.getFullName());
     }
 
@@ -56,6 +56,6 @@ class ContactMapperImplTest {
         assertThat(contactDTOS.get(0).getSubject()).isEqualTo(contactDTO.getSubject());
         assertThat(contactDTOS.get(0).getFullName()).isEqualTo(contactDTO.getFullName());
         assertThat(contactDTOS.get(0).getEmail()).isEqualTo(contactDTO.getEmail());
-        assertThat(contactDTOS.get(0).getMassage()).isEqualTo(contactDTO.getMassage());
+        assertThat(contactDTOS.get(0).getMessage()).isEqualTo(contactDTO.getMessage());
     }
 }
