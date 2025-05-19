@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
 import org.example.bookstoreapp.book.Category;
 import org.example.bookstoreapp.book.BookRepo;
+import org.example.bookstoreapp.user.Role;
+import org.example.bookstoreapp.user.User;
+import org.example.bookstoreapp.user.UserRepo;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +19,29 @@ import java.util.List;
 public class MockBook implements CommandLineRunner {
 
     private final BookRepo bookRepo;
+    private final UserRepo userRepo;
 
     @Override
     @Transactional
     public void run(String... args) {
+
         loadBooks();
+        loadAdmin();
+    }
+
+
+    private void loadAdmin(){
+        if(userRepo.count()==0){
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            User admin = User.builder()
+                    .role(Role.ADMIN)
+                    .fullName("Admin")
+                    .password(bCryptPasswordEncoder.encode("1234"))
+                    .email("admin@gmai.com")
+                    .build();
+
+            userRepo.save(admin);
+        }
     }
 
     private void loadBooks() {
@@ -381,8 +403,154 @@ public class MockBook implements CommandLineRunner {
                             "Configure static analysis tools to reduce the number of false reports\n" +
                             "Extend static analysis tools with custom plugins")
                     .build();
+            Book blockchain = Book.builder()
+                    .title("Blockchain in Action")
+                    .author("Bina Ramamurthy")
+                    .paperback(352)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .language("English")
+                    .publisher("Manning")
+                    .price(35.5)
+                    .rating(4.8)
+                    .isbn("9781617296086")
+                    .coverImage("https://skybooks.ir/images/productImages/Blockchain-in-Action_vK1665335406.jpg")
+                    .description("There’s a lot more to the blockchain than mining Bitcoin. This secure system for registering and verifying ownership and identity is perfect for supply chain logistics," +
+                            " health records, and other sensitive data management tasks. Blockchain in Action unlocks the full potential of this revolutionary technology, " +
+                            "showing you how to build your own decentralized apps for secure applications including digital democracy, private auctions, and electronic record management.\n" +
+                            "\n" +
+                            "There’s a lot more to the blockchain than mining Bitcoin. This secure system for registering and verifying ownership and identity is perfect for supply chain logistics, " +
+                            "health records, and other sensitive data management tasks. Blockchain in Action unlocks the full potential of this revolutionary technology," +
+                            " showing you how to build your own decentralized apps for secure applications including digital democracy, private auctions, and electronic record management." +
+                            "About the technology\n" +
+                            "Blockchain is more than just the tech behind Bitcoin—much more! Combining impenetrable security, decentralized transactions, and independently verifiable supply chains, blockchain applications have transformed currency, digital identity, and logistics. Platforms such as Ethereum and Hyperledger make it easy to get started by using familiar programming languages.\n" +
+                            "\n" +
+                            "About the book\n" +
+                            "Blockchain in Action teaches you how to design and build blockchain-based decentralized apps, and is written in a clear, " +
+                            "jargon-free style. First, you’ll get an overview of how blockchain works." +
+                            " Next, you’ll code your first smart contract using Ethereum and Solidity," +
+                            " adding a web interface, trust validation, and other features until your app is ready for deployment. " +
+                            "The only thing you need to get started is standard hardware and open source software.")
+                    .year(2020)
+                    .build();
+
+            Book masterBlock = Book.builder()
+                    .title("Mastering Blockchain")
+                    .author("Lorne Lantz, Daniel Cawrey")
+                    .paperback(284)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .language("English")
+                    .publisher("O'Reilly")
+                    .price(49.0)
+                    .discount(10)
+                    .rating(4.5)
+                    .year(2021)
+                    .isbn("9781492054702")
+                    .coverImage("https://skybooks.ir/images/productImages/MasteringBlockchain_Rp1656858129.jpg")
+                    .description("Unlocking the Power of Cryptocurrencies, Smart Contracts, and Decentralized Applications The future will be increasingly distributed. " +
+                            "As the publicity surrounding Bitcoin and blockchain has shown, distributed technology and business models are gaining popularity." +
+                            " Yet the disruptive potential of this technology is often obscured by hype and misconception. This detailed guide distills the complex, " +
+                            "fast moving ideas behind blockchain into an easily digestible reference manual, showing what's really going on under the hood.\n" +
+                            "\n" +
+                            "\n" +
+                            "Finance and technology pros will learn how a blockchain works as they explore the evolution and current state of the technology, " +
+                            "including the functions of cryptocurrencies and smart contracts. " +
+                            "This book is for anyone evaluating whether to invest time in the cryptocurrency and blockchain industry." +
+                            " Go beyond buzzwords and see what the technology really has to offer.")
+                    .build();
+
+            Book llmInProduction = Book.builder()
+                    .title("LLMs in Production")
+                    .author("Christopher Brousseau, Matt Sharp")
+                    .paperback(456)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .language("English")
+                    .publisher("Manning")
+                    .price(80.99)
+                    .discount(25)
+                    .rating(4.7)
+                    .year(2025)
+                    .isNew(true)
+                    .isbn("9781633437203")
+                    .coverImage("https://skybooks.ir/images/productImages/LLMs-in-Production_ZE1739115231.jpg")
+                    .description("LLMs in Production delivers vital insights into delivering MLOps for LLMs. You’ll learn how to operationalize these powerful AI models for chatbots, coding assistants, and more. " +
+                            "Find out what makes LLMs so different from traditional software and ML, discover best practices for working with them out of the lab, " +
+                            "and dodge common pitfalls with experienced advice.\n" +
+                            "\n" +
+                            "Purchase of the print book includes a free eBook in PDF and ePub formats from Manning Publications.\n" +
+                            "\n" +
+                            "About the book\n" +
+                            "\n" +
+                            "LLMs in Production is the comprehensive guide to LLMs you’ll need to effectively guide you to production usage." +
+                            " It takes you through the entire lifecycle of an LLM, from initial concept, to creation and fine tuning, " +
+                            "all the way to deployment. You’ll discover how to effectively prepare an LLM dataset, cost-efficient training techniques like LORA and RLHF," +
+                            " and how to evaluate your models against industry benchmarks.\n" +
+                            "\n" +
+                            "Learn to properly establish deployment infrastructure and address common challenges like retraining and load testing." +
+                            " Finally, you’ll go hands-on with three exciting example projects: a cloud-based LLM chatbot, a Code Completion VSCode")
+                    .build();
+
+            Book dataLLM = Book.builder()
+                    .title("Data Analysis with LLMs")
+                    .author("Immanuel Trummer")
+                    .paperback(233)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .language("English")
+                    .publisher("Manning")
+                    .price(65.99)
+                    .discount(20)
+                    .rating(4.7)
+                    .year(2025)
+                    .isNew(true)
+                    .isbn("9781633437647")
+                    .coverImage("https://skybooks.ir/images/productImages/Data-Analysis-with-LLMs_eI1746449146.jpg")
+                    .description("Speed up common data science tasks with AI assistants like ChatGPT and Large Language Models (LLMs) from Anthropic, " +
+                            "Cohere, Open AI, Google, Hugging Face, and more!\n" +
+                            "Data Analysis with LLMs teaches you to use the new generation of AI assistants and Large Language Models (LLMs) to aid and accelerate common data science tasks.\n" +
+                            "Learn how to use LLMs to:\n" +
+                            "• Analyze text, tables, images, and audio files\n" +
+                            "• Extract information from multi-modal data lakes\n" +
+                            "• Classify, cluster, transform, and query multimodal data\n" +
+                            "• Build natural language query interfaces over structured data sources\n" +
+                            "• Use LangChain to build complex data analysis pipelines\n" +
+                            "• Prompt engineering and model configuration\n" +
+                            "All practical, Data Analysis with LLMs takes you from your first prompts through advanced techniques like creating LLM-based agents for data analysis and fine-tuning existing models. You’ll learn how to extract data, " +
+                            "build natural language query interfaces, and much more.")
+                    .build();
+
+            Book buildOwnRobot = Book.builder()
+                    .title("Build Your Own Robot")
+                    .author("Marwan Alsabbagh")
+                    .paperback(250)
+                    .category(Category.COMPUTER_SCIENCE)
+                    .language("English")
+                    .publisher("Manning")
+                    .price(75.99)
+                    .discount(20)
+                    .rating(4.8)
+                    .year(2024)
+                    .isbn("9781633438453")
+                    .coverImage("https://skybooks.ir/images/productImages/Build-Your-Own-Robot_8d1706282248.jpg")
+                    .description("Using Python, CRICKIT, and Raspberry PI  A DIY guide to bringing your first robot to life with cheap and basic components.\n" +
+                            "Build Your Own Robot introduces you to the exciting world of robotics in a way that’s fun and affordable! " +
+                            "You’ll build your own real robot with easy-to-find hardware and free open source software. Plus, " +
+                            "all the components you need can be assembled with simple tools like a screwdriver.\n" +
+                            "In Build Your Own Robot you’ll learn how to:\n" +
+                            "Use cameras to capture photos and let your robot see\n" +
+                            "Add cameras and basic computer vision\n" +
+                            "Coordinate DC motors to move your robot\n" +
+                            "Write a web app to control your robot\n" +
+                            "Set up controls for joysticks\n" +
+                            "Read QR codes to find and identify objects\n" +
+                            "This book shows you how anyone can start building their own robot—no special soldering or electronic skills required. " +
+                            "All you need is some basic Python know-how to get started. From scratch, you’ll go hands-on with DC motors, " +
+                            "touch sensors, custom shell scripting, joysti ... ")
+                    .build();
+
+
+
+
             bookRepo.saveAll(List.of(grokAlgo,grokBitcoin,grokAi,cleanCode,cleanArchitecture,springAction,friends,rustAction,cryptoEngineers,atomic,hurt,deepWork
-            ,theEffectiveProductDesigner,webAppSecurity,lawOfPower,junitJava,javaAvoid));
+            ,theEffectiveProductDesigner,webAppSecurity,lawOfPower,junitJava,javaAvoid,blockchain,masterBlock,llmInProduction,dataLLM,buildOwnRobot));
         }
     }
 }
