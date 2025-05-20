@@ -41,10 +41,4 @@ public class BookController {
     public ResponseEntity<List<Book>> getBestSeller(@RequestParam int books) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findBestSeller(books));
     }
-
-    @GetMapping("allBooks")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<Book>> getAllBooks() {
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.allBooks());
-    }
 }

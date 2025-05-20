@@ -60,10 +60,12 @@ public class AuthenticationService {
         Optional<User> userEmail = userRepo.findByEmail(authenticationRequest.getEmail())
                 .filter(user -> user
                         .getRole()
-                        .equals(Role.USER));
+                        .equals(Role.ADMIN));
         if(userEmail.isPresent()) {
+            String token = jwtService.generateToken(userEmail.get());
+            saveUserToken(token, userEmail.get());
             return AuthenticationResponse.builder()
-                    .message("Welcome Back Admin !!")
+                    .token(token)
                     .isAdmin(true)
                     .build();
         }
