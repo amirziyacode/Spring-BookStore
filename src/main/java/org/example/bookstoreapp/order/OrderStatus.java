@@ -1,5 +1,5 @@
 package org.example.bookstoreapp.order;
 
 public enum OrderStatus {
-    DELIVERED,PROCESSING,COMPLETED,CANCELLED
+    DELIVERED,PROCESSING,PENDING, SHIPPED,CANCELLED
 }
