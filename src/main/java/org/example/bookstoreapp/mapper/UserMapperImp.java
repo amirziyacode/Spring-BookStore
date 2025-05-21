@@ -2,7 +2,7 @@ package org.example.bookstoreapp.mapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.bookstoreapp.admin.UserResponse;
+import org.example.bookstoreapp.user.UserResponse;
 import org.example.bookstoreapp.dto.UserDTO;
 import org.example.bookstoreapp.user.User;
 import org.springframework.stereotype.Component;

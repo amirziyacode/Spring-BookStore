@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.admin;
+package org.example.bookstoreapp.order;
 
 
 import lombok.AllArgsConstructor;
