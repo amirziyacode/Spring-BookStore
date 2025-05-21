@@ -4,6 +4,7 @@ package org.example.bookstoreapp.admin;
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
 import org.example.bookstoreapp.book.BookRepo;
+import org.example.bookstoreapp.mapper.OrderMapper;
 import org.example.bookstoreapp.mapper.UserMapper;
 import org.example.bookstoreapp.order.Order;
 import org.example.bookstoreapp.order.OrderRepo;
@@ -19,6 +20,7 @@ public class AdminService {
     private final UserRepo userRepo;
     private final OrderRepo orderRepo;
     private final UserMapper userMapper;
+    private final OrderMapper orderMapper;
 
     public List<Book> allBooks() {
         return bookRepo.findAll();
@@ -28,5 +30,5 @@ public class AdminService {
         return userMapper.UserToUserResponseList(userRepo.findAll());
     }
 
-    public List<Order> getAllOrders() {return orderRepo.findAll();}
+    public List<OrderDetails> getAllOrders() {return  orderMapper.OrderToOrderDetailsList(orderRepo.findAll());}
 }

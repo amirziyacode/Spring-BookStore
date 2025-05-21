@@ -2,7 +2,6 @@ package org.example.bookstoreapp.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.example.bookstoreapp.book.Book;
-import org.example.bookstoreapp.order.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class AdminController {
     }
 
     @GetMapping("getAllOrders")
-    public ResponseEntity<List<Order>> getAllOrders() {
+    public ResponseEntity<List<OrderDetails>> getAllOrders() {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.getAllOrders());
     }
 }

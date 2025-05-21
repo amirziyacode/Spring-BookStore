@@ -3,9 +3,6 @@ package org.example.bookstoreapp.admin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import java.time.LocalDate;
-
 @Data
 @Builder
 @AllArgsConstructor
