@@ -2,9 +2,12 @@ package org.example.bookstoreapp.mapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.bookstoreapp.admin.UserResponse;
 import org.example.bookstoreapp.dto.UserDTO;
 import org.example.bookstoreapp.user.User;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -42,5 +45,22 @@ public class UserMapperImp implements UserMapper {
                 .address(userDTO.getAddress())
                 .phoneNumber(userDTO.getPhone())
                 .build();
+    }
+
+    @Override
+    public UserResponse UserToUserResponse(User user) {
+        return UserResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getFullName())
+                .isActive(user.isEnabled())
+                .createdAt(String.valueOf(user.getCreatedAt()))
+                .role(String.valueOf(user.getRole()))
+                .build();
+    }
+
+    @Override
+    public List<UserResponse> UserToUserResponseList(List<User> users) {
+        return users.stream().map(this::UserToUserResponse).collect(Collectors.toList());
     }
 }
