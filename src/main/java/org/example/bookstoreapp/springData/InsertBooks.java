@@ -12,12 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class MockBook implements CommandLineRunner {
+public class InsertBooks implements CommandLineRunner {
 
     private final BookRepo bookRepo;
     private final UserRepo userRepo;
@@ -39,6 +38,7 @@ public class MockBook implements CommandLineRunner {
                     .fullName("Admin")
                     .password(bCryptPasswordEncoder.encode("1234"))
                     .email("admin@gmai.com")
+                    .isActive(true)
                     .build();
 
             userRepo.save(admin);

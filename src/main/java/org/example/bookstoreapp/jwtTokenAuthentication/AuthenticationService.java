@@ -36,6 +36,7 @@ public class AuthenticationService {
                     .email(registerRequest.getEmail())
                     .password(passwordEncoder.encode(registerRequest.getPassword()))
                     .role(Role.USER)
+                    .isActive(true)
                     .createdAt(LocalDate.now())
                     .build();
             userRepo.save(buildUser);
@@ -46,7 +47,7 @@ public class AuthenticationService {
                     .token(token)
                     .build();
         }else {
-            throw new UsernameNotFoundException("Email already in use");
+            throw new IllegalArgumentException("Email already in use");
         }
     }
 
@@ -65,6 +66,7 @@ public class AuthenticationService {
                         .equals(Role.ADMIN));
         if(userEmail.isPresent()) {
             String token = jwtService.generateToken(userEmail.get());
+            revokeAllUserTokens(userEmail.get());
             saveUserToken(token, userEmail.get());
             return AuthenticationResponse.builder()
                     .token(token)
@@ -73,6 +75,7 @@ public class AuthenticationService {
         }
         return userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
             String token = jwtService.generateToken(user);
+            revokeAllUserTokens(user);
             saveUserToken(token, user);
             return AuthenticationResponse.builder().token(token).build();
         })
