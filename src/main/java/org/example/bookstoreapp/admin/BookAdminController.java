@@ -36,4 +36,9 @@ public class BookAdminController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(bookAdminService.deleteBook(bookId));
     }
 
+    @DeleteMapping("deleteAll")
+    public ResponseEntity<String> deleteAllBooks() {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(bookAdminService.deleteAllBooks());
+    }
+
 }

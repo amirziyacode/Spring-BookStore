@@ -41,6 +41,7 @@ public class BookAdminService {
                     .rating(book.getRating())
                     .description(book.getDescription())
                     .language(book.getLanguage())
+                    .publisher(book.getPublisher())
                     .build();
 
             bookRepo.save(build);
@@ -61,6 +62,7 @@ public class BookAdminService {
            oldBook.setPaperback(book.getPaperback());
            oldBook.setCoverImage(book.getCoverImage());
            oldBook.setIsbn(book.getIsbn());
+            oldBook.setPublisher(book.getPublisher());
            oldBook.setDiscount(book.getDiscount());
            oldBook.setRating(book.getRating());
            oldBook.setCategory(Category.valueOf(book.getCategory().getCategoryName()));
@@ -82,5 +84,10 @@ public class BookAdminService {
         }
 
         throw new IllegalStateException("Book not found");
+    }
+
+    public String deleteAllBooks() {
+        bookRepo.deleteAll();
+        return "All Books deleted successfully";
     }
 }
