@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -53,6 +54,7 @@ public class InsertBooks implements CommandLineRunner {
                     .coverImage("https://skybooks.ir/images/productImages/Grokking-Algorithms_EB1709675048.jpg")
                     .price(28.99)
                     .discount(10)
+                    .createdAt(LocalDateTime.now())
                     .isNew(true)
                     .rating(5)
                     .publisher("Manning")
@@ -82,6 +84,7 @@ public class InsertBooks implements CommandLineRunner {
                     .category(Category.COMPUTER_SCIENCE)
                     .isbn("9781617294648")
                     .paperback(480)
+                    .createdAt(LocalDateTime.now())
                     .coverImage("https://skybooks.ir/images/productImages/GrokkingBitcoin1_Rs1657377051.jpg")
                     .description("If you think Bitcoin is just an alternative currency for geeks, it's time to think again. " +
                             "Grokking Bitcoin opens up this powerful distributed ledger system," +
@@ -100,6 +103,7 @@ public class InsertBooks implements CommandLineRunner {
                     .discount(10)
                     .paperback(393)
                     .isbn("9781617296185")
+                    .createdAt(LocalDateTime.now())
                     .coverImage("https://skybooks.ir/images/productImages/GrokkingArtificialIntelligenceAlgorithms4_uI1657375595.jpg")
                     .rating(4.3)
                     .category(Category.COMPUTER_SCIENCE)
@@ -123,6 +127,7 @@ public class InsertBooks implements CommandLineRunner {
                     .isbn("9780132350884")
                     .year(2009)
                     .paperback(462)
+                    .createdAt(LocalDateTime.now())
                     .description("Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year," +
                             " countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way.Noted software expert Robert C. " +
                             "Martin, presents a revolutionary paradigm with Clean Code: A Handbook of Agile Software Craftsmanship." +
@@ -143,6 +148,7 @@ public class InsertBooks implements CommandLineRunner {
                     .paperback(457)
                     .year(2021)
                     .isbn("9781617294556")
+                    .createdAt(LocalDateTime.now())
                     .description("Systems programming concepts and techniques Rust in Action is a hands-on guide to systems programming with Rust. " +
                             "Written for inquisitive programmers, it presents real-world use cases that go far beyond syntax and structure. " +
                             " Summary :Rust in Action introduces the Rust programming language by exploring numerous systems programming concepts and techniques. " +
@@ -163,6 +169,7 @@ public class InsertBooks implements CommandLineRunner {
                     .year(2020)
                     .language("English")
                     .publisher("World Scientific")
+                    .createdAt(LocalDateTime.now())
                     .description("Cyptology is increasingly becoming one of the most essential topics of interest in everyday life." +
                             " Digital communication happens by transferring data between at least two participants — But do we want to disclose private information while executing a sensitive bank transfer? " +
                             "How about allowing third-party entities to eavesdrop on private calls while performing an important secret business discussion? Do we want to allow ambient communication concerning us to be manipulated while control software is driving our autonomous car along a steep slope? " +
@@ -182,6 +189,7 @@ public class InsertBooks implements CommandLineRunner {
                     .language("English")
                     .year(2016)
                     .paperback(266)
+                    .createdAt(LocalDateTime.now())
                     .category(Category.LANGUAGE)
                     .description("A developer-focused guide to writing applications using Spring Boot." +
                             " You'll learn how to bypass the tedious configuration steps so that you can concentrate on your application's behavior.  " +
@@ -203,6 +211,7 @@ public class InsertBooks implements CommandLineRunner {
                     .paperback(429)
                     .category(Category.COMPUTER_SCIENCE)
                     .isbn("9780134494166")
+                    .createdAt(LocalDateTime.now())
                     .description("A Craftsman's Guide to Software Structure and Design  By applying universal rules of software architecture," +
                             " you can dramatically improve developer productivity throughout the life of any software system. " +
                             "Now, building upon the success of his best-selling books Clean Code and The Clean Coder, " +
@@ -225,6 +234,7 @@ public class InsertBooks implements CommandLineRunner {
                     .discount(5)
                     .year(2022)
                     .isbn("9781250866448")
+                    .createdAt(LocalDateTime.now())
                     .paperback(280)
                     .description("The BELOVED STAR OF FRIENDS takes us behind the scenes of the hit sitcom and his struggles with addiction in this “CANDID, DARKLY FUNNY...POIGNANT” memoir (The New York Times)A MOST ANTICIPATED BOOK by Time," +
                             " Associated Press, Goodreads, USA Today, and more!“Hi, my name is Matthew, although you may know me by another name. " +
@@ -244,6 +254,7 @@ public class InsertBooks implements CommandLineRunner {
                     .language("English")
                     .publisher("Avery")
                     .isbn("9780735211292")
+                    .createdAt(LocalDateTime.now())
                     .paperback(320)
                     .year(2018)
                     .coverImage("https://skybooks.ir/images/productImages/Atomic-Habits_E71670759776.jpg")
@@ -265,6 +276,7 @@ public class InsertBooks implements CommandLineRunner {
                     .isBestseller(true)
                     .language("English")
                     .publisher("Lioncrest")
+                    .createdAt(LocalDateTime.now())
                     .isbn("9781544512280")
                     .paperback(297)
                     .year(2018)
@@ -285,6 +297,7 @@ public class InsertBooks implements CommandLineRunner {
                     .category(Category.MOTIVATION)
                     .language("English")
                     .publisher("Grand Central")
+                    .createdAt(LocalDateTime.now())
                     .isBestseller(true)
                     .rating(4.2)
                     .price(19.99)
@@ -302,6 +315,7 @@ public class InsertBooks implements CommandLineRunner {
                     .author("Artiom Dashinsky")
                     .price(28.99)
                     .discount(10)
+                    .createdAt(LocalDateTime.now())
                     .rating(4)
                     .isbn("9798326456779")
                     .publisher("Independently Published")
@@ -328,6 +342,7 @@ public class InsertBooks implements CommandLineRunner {
                     .category(Category.COMPUTER_SCIENCE)
                     .year(2024)
                     .price(37.25)
+                    .createdAt(LocalDateTime.now())
                     .language("English")
                     .publisher("O'Reilly")
                     .isbn("9781098143930")
@@ -345,6 +360,7 @@ public class InsertBooks implements CommandLineRunner {
                     .isBestseller(true)
                     .paperback(478)
                     .category(Category.MOTIVATION)
+                    .createdAt(LocalDateTime.now())
                     .year(1998)
                     .language("English")
                     .publisher("Penguin Books")
@@ -371,6 +387,7 @@ public class InsertBooks implements CommandLineRunner {
                     .year(2017)
                     .language("English")
                     .publisher("Apress")
+                    .createdAt(LocalDateTime.now())
                     .price(50.91)
                     .discount(10)
                     .rating(4.5)
@@ -390,6 +407,7 @@ public class InsertBooks implements CommandLineRunner {
                     .price(45.5)
                     .discount(5)
                     .rating(4.8)
+                    .createdAt(LocalDateTime.now())
                     .year(2024)
                     .isNew(true)
                     .isbn("9781633437968")
@@ -413,6 +431,7 @@ public class InsertBooks implements CommandLineRunner {
                     .publisher("Manning")
                     .price(35.5)
                     .rating(4.8)
+                    .createdAt(LocalDateTime.now())
                     .isbn("9781617296086")
                     .coverImage("https://skybooks.ir/images/productImages/Blockchain-in-Action_vK1665335406.jpg")
                     .description("There’s a lot more to the blockchain than mining Bitcoin. This secure system for registering and verifying ownership and identity is perfect for supply chain logistics," +
@@ -445,6 +464,7 @@ public class InsertBooks implements CommandLineRunner {
                     .discount(10)
                     .rating(4.5)
                     .year(2021)
+                    .createdAt(LocalDateTime.now())
                     .isbn("9781492054702")
                     .coverImage("https://skybooks.ir/images/productImages/MasteringBlockchain_Rp1656858129.jpg")
                     .description("Unlocking the Power of Cryptocurrencies, Smart Contracts, and Decentralized Applications The future will be increasingly distributed. " +
@@ -469,6 +489,7 @@ public class InsertBooks implements CommandLineRunner {
                     .price(80.99)
                     .discount(25)
                     .rating(4.7)
+                    .createdAt(LocalDateTime.now())
                     .year(2025)
                     .isNew(true)
                     .isbn("9781633437203")
@@ -500,6 +521,7 @@ public class InsertBooks implements CommandLineRunner {
                     .price(65.99)
                     .discount(20)
                     .rating(4.7)
+                    .createdAt(LocalDateTime.now())
                     .year(2025)
                     .isNew(true)
                     .isbn("9781633437647")
@@ -527,6 +549,7 @@ public class InsertBooks implements CommandLineRunner {
                     .publisher("Manning")
                     .price(75.99)
                     .discount(20)
+                    .createdAt(LocalDateTime.now())
                     .rating(4.8)
                     .year(2024)
                     .isbn("9781633438453")

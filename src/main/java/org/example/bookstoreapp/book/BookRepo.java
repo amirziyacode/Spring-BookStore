@@ -14,6 +14,6 @@ import java.util.Optional;
 public interface BookRepo extends JpaRepository<Book, Integer> {
     @NonNull
      Page<Book> findAll(@NonNull Pageable booksPageable);
-    Optional<List<Book>> findByCategory(Category category);
+    Optional<List<Book>> findByCategory(Category bookCategory);
 }
 
