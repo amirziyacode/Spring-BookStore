@@ -1,6 +1,7 @@
 package org.example.bookstoreapp.book;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +37,11 @@ public class Book {
     private int year;
     private  String publisher;
     private String language;
+
+    @JsonProperty("isNew")
     private boolean isNew;
+
+    @JsonProperty("isBestSeller")
     private boolean isBestseller;
 
     @Column(name = "created_at")

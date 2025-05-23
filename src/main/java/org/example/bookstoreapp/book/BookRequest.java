@@ -22,4 +22,5 @@ public class BookRequest {
     private double rating;
     private String language;
     private String coverImage;
+    private double discount;
 }

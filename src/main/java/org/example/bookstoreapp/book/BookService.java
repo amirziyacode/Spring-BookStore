@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +17,7 @@ public class BookService {
     private final BookRepo bookRepo;
 
     public Page<Book> getAllBooks(int pageNumber,int perPage) {
-        Pageable pageable = PageRequest.of(pageNumber,perPage);
+        Pageable pageable = PageRequest.of(pageNumber,perPage, Sort.by(Sort.Direction.ASC,"createdAt"));
         return bookRepo.findAll(pageable);
     }
 
