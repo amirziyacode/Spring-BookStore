@@ -4,11 +4,16 @@ package org.example.bookstoreapp.mapper;
 
 import org.assertj.core.api.Assertions;
 import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.user.Role;
 import org.example.bookstoreapp.user.User;
+import org.example.bookstoreapp.user.UserResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -78,5 +83,74 @@ class UserMapperImpTest {
         Assertions.assertThat(userDto.getPhone()).isEqualTo(user.getPhoneNumber());
         Assertions.assertThat(userDto.getZipCode()).isEqualTo(user.getZipCode());
 
+    }
+    @Test
+    void should_give_user_to_userResponse(){
+        User mockUser = User.builder()
+                .id(1)
+                .email("email")
+                .fullName("John Doe")
+                .city("New York")
+                .country("USA")
+                .address("123 Main St")
+                .phoneNumber(1234567890L)
+                .state("NY")
+                .isActive(true)
+                .role(Role.USER)
+                .zipCode(10001)
+                .build();
+        UserResponse userResponse = UserResponse.builder()
+                .id(1)
+                .email("email")
+                .name("John Doe")
+                .isActive(true)
+                .role("USER")
+                .build();
+
+        UserResponse userToUserResponse = userMapper.UserToUserResponse(mockUser);
+
+        assertNotNull(userToUserResponse);
+        assertEquals(userResponse.getId(), userToUserResponse.getId());
+        assertEquals(userResponse.getName(), userToUserResponse.getName());
+        assertEquals(userResponse.isActive(), userToUserResponse.isActive());
+        assertEquals(userResponse.getRole(), userToUserResponse.getRole());
+        assertEquals(userResponse.getEmail(), userToUserResponse.getEmail());
+    }
+
+    @Test
+    void should_give_user_to_List_of_userResponse(){
+        User mockUser = User.builder()
+                .id(1)
+                .email("email")
+                .fullName("John Doe")
+                .city("New York")
+                .country("USA")
+                .address("123 Main St")
+                .phoneNumber(1234567890L)
+                .state("NY")
+                .isActive(true)
+                .role(Role.USER)
+                .zipCode(10001)
+                .build();
+
+
+        UserResponse userResponse = UserResponse.builder()
+                .id(1)
+                .email("email")
+                .name("John Doe")
+                .isActive(true)
+                .role("USER")
+                .build();
+
+
+        List<UserResponse> useredToUserResponseList = userMapper.UserToUserResponseList(List.of(mockUser));
+
+
+        assertNotNull(useredToUserResponseList);
+        assertEquals(useredToUserResponseList.get(0).getId(), userResponse.getId());
+        assertEquals(useredToUserResponseList.get(0).getName(), userResponse.getName());
+        assertEquals(useredToUserResponseList.get(0).getEmail(), userResponse.getEmail());
+        assertEquals(useredToUserResponseList.get(0).getRole(), userResponse.getRole());
+        assertEquals(useredToUserResponseList.get(0).isActive(), userResponse.isActive());
     }
 }

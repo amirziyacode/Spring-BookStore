@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.example.bookstoreapp.jwtToken.JwtService;
 import org.example.bookstoreapp.jwtToken.Token;
 import org.example.bookstoreapp.jwtToken.TokenRepo;
+import org.example.bookstoreapp.user.Role;
 import org.example.bookstoreapp.user.User;
 import org.example.bookstoreapp.user.UserRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,6 +61,7 @@ class AuthenticationServiceTest {
         user = User.builder()
                 .fullName("John Doe")
                 .email("john@example.com")
+                .role(Role.USER)
                 .password("password123")
                 .build();
     }
@@ -111,7 +113,7 @@ class AuthenticationServiceTest {
 
         when(userRepo.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
 
-        UsernameNotFoundException usernameNotFoundException = assertThrows(UsernameNotFoundException.class, () -> authenticationService.register(registerRequest));
+        IllegalArgumentException usernameNotFoundException = assertThrows(IllegalArgumentException.class, () -> authenticationService.register(registerRequest));
         assertThat(usernameNotFoundException.getMessage()).isEqualTo("Email already in use");
     }
 

@@ -6,19 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 class BookServiceTest {
@@ -59,13 +55,14 @@ class BookServiceTest {
                         .title("title " + i)
                         .author("author" + i)
                         .price(i * 10)
+                        .createdAt(LocalDateTime.now())
                         .description("description" + i)
                         .build())
                 .toList();
-        Pageable pageable = PageRequest.of(0, 12);
+        Pageable pageable = PageRequest.of(0, 12, Sort.by(Sort.Direction.ASC,"createdAt"));
         Page<Book> page = new PageImpl<>(bookList, pageable, bookList.size());
 
-        Mockito.when(bookRepo.findAll(pageable)).thenReturn(page);
+        when(bookRepo.findAll(pageable)).thenReturn(page);
 
         Page<Book> allBooks = bookService.getAllBooks(0, 12);
 
@@ -82,7 +79,7 @@ class BookServiceTest {
     void find_by_category(){
         List<Book> books = Collections.singletonList(mockBook);
 
-        Mockito.when(bookRepo.findByCategory(Category.valueOf(String.valueOf(Category.COMPUTER_SCIENCE)))).thenReturn(Optional.of(books));
+        when(bookRepo.findByCategory(Category.valueOf(String.valueOf(Category.COMPUTER_SCIENCE)))).thenReturn(Optional.of(books));
 
         assertEquals(books, bookService.findByCategory(String.valueOf(Category.COMPUTER_SCIENCE)));
     }
@@ -94,13 +91,13 @@ class BookServiceTest {
 
     @Test
     void find_books_by_id(){
-        Mockito.when(bookRepo.findById(1)).thenReturn(Optional.of(mockBook));
+        when(bookRepo.findById(1)).thenReturn(Optional.of(mockBook));
         assertEquals(mockBook, bookService.findById(1));
     }
 
     @Test
     void find_bestSeller_should_return_books(){
-        Mockito.when(bookService.findBestSeller(1)).thenReturn(Collections.singletonList(mockBook));
+        when(bookService.findBestSeller(1)).thenReturn(Collections.singletonList(mockBook));
         assertEquals(List.of(mockBook), bookService.findBestSeller(1));
     }
 }
