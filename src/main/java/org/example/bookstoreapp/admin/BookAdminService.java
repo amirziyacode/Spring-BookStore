@@ -21,8 +21,8 @@ public class BookAdminService {
     }
 
     public String addBook(BookRequest book) {
-        if(book.getRating() > 5.0){
-            throw new IllegalStateException("Rating should be greater than 5.0");
+        if(book.getRating() < 0 || book.getRating() > 5.0) {
+            throw new IllegalArgumentException("Rating should be greater than 5.0");
         }
         try{
             Category bookCategory = Category.valueOf(book.getCategory().getCategoryName());
@@ -47,7 +47,7 @@ public class BookAdminService {
             bookRepo.save(build);
 
         }catch (IllegalArgumentException e){
-            return  "error with name of category :" + book.getCategory().getCategoryName();
+            return  "error with name of category : " + book.getCategory().getCategoryName();
         }
 
         return "Book added successfully";
@@ -72,22 +72,22 @@ public class BookAdminService {
 
            return "Book updated successfully";
 
-        }).orElseThrow(() ->  new IllegalStateException("Book not found"));
+        }).orElseThrow(() ->  new RuntimeException("Book not found"));
 
-       return "Book Not updated successfully";
+       return "Book updated successfully";
     }
 
-    public String deleteBook(int bookId) {
-        if(bookRepo.findById(bookId).isPresent()){
-            bookRepo.deleteById(bookId);
-            return "Book deleted successfully";
+        public String deleteBook(int bookId) {
+            if(bookRepo.findById(bookId).isPresent()){
+                bookRepo.deleteById(bookId);
+                return "Book deleted successfully";
+            }
+
+            throw new IllegalStateException("Book not found");
         }
 
-        throw new IllegalStateException("Book not found");
-    }
-
-    public String deleteAllBooks() {
-        bookRepo.deleteAll();
-        return "All Books deleted successfully";
-    }
+        public String deleteAllBooks() {
+            bookRepo.deleteAll();
+            return "All Books deleted successfully";
+        }
 }
