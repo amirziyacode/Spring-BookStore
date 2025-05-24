@@ -61,7 +61,7 @@ class NotificationControllerTest {
                 .content(objectMapper.writeValueAsString(List.of(notification))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].type").value("PROMOTION"))
-                .andExpect(jsonPath("[0].read").value(false))
+                .andExpect(jsonPath("$[0].read").value(false))
                 .andExpect(jsonPath("$[0].message").value(notification.getMessage()))
                 .andExpect(jsonPath("$[0].title").value(notification.getTitle())
                 );
@@ -95,7 +95,7 @@ class NotificationControllerTest {
 
         when(notificationService.marksAllRead("email")).thenReturn(List.of(build));
 
-        mockMvc.perform(get("http://localhost::8080/api/notification/marksAllRead/{email}",user.getEmail())
+        mockMvc.perform(get("http://localhost:8080/api/notification/marksAllRead/{email}",user.getEmail())
                 .content(objectMapper.writeValueAsString(List.of(build)))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
