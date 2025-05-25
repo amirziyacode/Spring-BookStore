@@ -34,7 +34,11 @@ public class UserAdminService {
 
         Optional<User> byId = userRepo.findById(userId);
 
-        if(byId.isPresent() && byId.get().getRole().equals(Role.ADMIN)){
+        if(byId.isEmpty()){
+            throw new RuntimeException("User not found");
+        }
+
+        if(byId.get().getRole().equals(Role.ADMIN)){
             throw new IllegalArgumentException("You are not allowed to change the this user's role");
         }
 
@@ -44,7 +48,7 @@ public class UserAdminService {
                  user.setRole(roleEnum);
                  userRepo.save(user);
              }catch (IllegalArgumentException e){
-                 throw new RuntimeException("Invalid order status: " + role);
+                 throw new RuntimeException("Invalid user status: " + role);
              }
         });
 

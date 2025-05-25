@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/admin/user")
-public class UserController {
+public class UserAdminController {
     private final UserAdminService userAdminService;
     @GetMapping("getAllUsers")
     public ResponseEntity<List<UserResponse>> getAllUser() {
@@ -28,5 +28,4 @@ public class UserController {
     public ResponseEntity<String> updateRole(@PathVariable int userId, @RequestBody UserRoleResponse userRoleResponse){
         return ResponseEntity.status(HttpStatus.CREATED).body(userAdminService.changeRole(userId, userRoleResponse.getRole()));
     }
-
 }
