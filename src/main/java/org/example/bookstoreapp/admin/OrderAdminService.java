@@ -19,13 +19,16 @@ public class OrderAdminService {
     public List<OrderDetails> getAllOrders() {return  orderMapper.OrderToOrderDetailsList(orderRepo.findAll());}
 
     public void changeStatus(String orderStatus, Integer orderId) {
+        if(orderRepo.findById(orderId).isEmpty()) {
+            throw new RuntimeException("Order not found");
+        }
         orderRepo.findById(orderId).ifPresent(order -> {
             try {
                 OrderStatus status = OrderStatus.valueOf(orderStatus);
                 order.setStatus(status);
                 orderRepo.save(order);
             } catch (IllegalArgumentException e) {
-                throw new RuntimeException("Invalid order status: " + orderStatus);
+                throw new IllegalArgumentException("Invalid order status: " + orderStatus);
             }
         });
     }
