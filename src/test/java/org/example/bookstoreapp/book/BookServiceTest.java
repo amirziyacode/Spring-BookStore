@@ -86,7 +86,8 @@ class BookServiceTest {
 
     @Test
     void find_by_id_throw_exception(){
-        assertThrows(IllegalArgumentException.class, () -> bookService.findBestSeller(-1));
+        String message = assertThrows(IllegalArgumentException.class, () -> bookService.findById(-1)).getMessage();
+        assertEquals("No book found for id -1", message);
     }
 
     @Test
