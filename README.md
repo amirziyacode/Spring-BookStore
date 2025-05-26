@@ -9,6 +9,12 @@ An advanced online bookstore built with **Java Spring Boot**, where users can br
 
 ---
 
+## 🌐 Live Demo
+
+Check out the deployed frontend here: [https://ai-book-store-jyd2.vercel.app/](https://ai-book-store-jyd2.vercel.app/)
+
+---
+
 ## ✨ Features
 
 ### 👤 User Panel:
@@ -40,7 +46,7 @@ An advanced online bookstore built with **Java Spring Boot**, where users can br
 
 * **Backend**: Java, Spring Boot, Spring Security, Spring Data JPA
 * **Database**: MySQL or PostgreSQL
-* **Frontend**: [NextJs](https://ai-book-store-6aa2.vercel.app/)
+* **Frontend**: NextJs
 * **AI Integration**: gemma3/googleAi
 * **Authentication**: JWT / Spring Security
 * **Deployment**: Docker / Heroku / VPS
