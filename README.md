@@ -40,8 +40,8 @@ An advanced online bookstore built with **Java Spring Boot**, where users can br
 
 * **Backend**: Java, Spring Boot, Spring Security, Spring Data JPA
 * **Database**: MySQL or PostgreSQL
-* **Frontend**: (React / Thymeleaf / Other)
-* **AI Integration**: OpenAI API / Custom NLP model
+* **Frontend**: [NextJs](https://ai-book-store-6aa2.vercel.app/)
+* **AI Integration**: gemma3/googleAi
 * **Authentication**: JWT / Spring Security
 * **Deployment**: Docker / Heroku / VPS
 
