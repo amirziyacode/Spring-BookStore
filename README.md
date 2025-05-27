@@ -95,6 +95,48 @@ ollama run gemma3
 ```
 
 
+## 🔧 Admin API Endpoints
+
+This section includes administrative endpoints for managing books, orders, and users.
+
+---
+
+### 📚 Book Administration (`BookAdminController.java`)
+
+**Base Path:** `/api/admin/book`
+
+| Method | Endpoint                  | Description |
+|--------|---------------------------|-------------|
+| GET    | `/getAllBooks`            | Retrieves a list of all books |
+| POST   | `/addBook`                | Adds a new book – Requires `BookRequest` in the request body |
+| PUT    | `/updateBook/{bookId}`    | Updates an existing book identified by `bookId` – Requires `BookRequest` in the request body |
+| DELETE | `/deleteBook/{bookId}`    | Deletes a specific book identified by `bookId` |
+| DELETE | `/deleteAll`              | Deletes all books |
+
+---
+
+### 🛒 Order Administration (`OrderAdminController.java`)
+
+**Base Path:** `/api/admin/order`
+
+| Method | Endpoint                     | Description |
+|--------|------------------------------|-------------|
+| GET    | `/getAllOrders`              | Retrieves a list of all orders |
+| PUT    | `/updateStatus/{orderId}`    | Updates the status of an order identified by `orderId` – Requires `OrderStatusResponse` (containing `orderStatus`) in the request body |
+
+---
+
+### 👥 User Administration (`UserAdminController.java`)
+
+**Base Path:** `/api/admin/user`
+
+| Method | Endpoint                     | Description |
+|--------|------------------------------|-------------|
+| GET    | `/getAllUsers`               | Retrieves a list of all users |
+| PUT    | `/updateStatus/{userId}`     | Updates the active status of a user – Requires `status` query parameter (true or false) |
+| PUT    | `/updateRole/{userId}`       | Updates the role of a user – Requires `UserRoleResponse` (containing `role`) in the request body |
+
+
 ## 📚 License
 
 This project is licensed under the [MIT License](LICENSE).
