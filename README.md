@@ -54,6 +54,7 @@ Check out the deployed frontend here: [https://ai-book-store-jyd2.vercel.app/](h
 
 ---
 
+
 ## 🚀 Getting Started
 
 1. **Clone the repository:**
@@ -84,6 +85,73 @@ Check out the deployed frontend here: [https://ai-book-store-jyd2.vercel.app/](h
 * Add internationalization (i18n) support
 
 ---
+
+## ✅ Project Testing Documentation
+
+This document describes the testing structure and coverage for the project, including unit tests, integration tests, and testing tools.
+
+---
+
+### 🧪 Test Strategy
+
+We follow a layered testing approach:
+
+- **Unit Tests**: Focus on individual classes or methods (e.g., services, controllers).
+- **Integration Tests**: Validate how different layers interact (e.g., controller + service + repository).
+- **End-to-End Tests (Optional)**: Simulate real user scenarios through the whole application.
+
+---
+
+### 🛠 Testing Tools
+
+- **JUnit 5** – For writing and executing unit tests.
+- **Mockito** – For mocking dependencies in unit tests.
+- **Spring Boot Test** – For integration tests with a real Spring context.
+- **Testcontainers** (optional) – For testing with real databases like PostgreSQL or MySQL.
+
+---
+
+### 📁 Test Structure
+
+```
+src/
+├── main/
+│   └── java/
+│       └── com/example/project/...
+├── test/
+│   └── java/
+│       └── com/example/project/
+│           ├── controller/   # Controller layer tests
+│           ├── service/      # Service layer unit tests
+│           ├── repository/   # Integration tests for repositories
+│           └── utils/        # Utility/helper tests
+```
+
+---
+
+### 🧪 Sample Test Cases
+
+- `BookServiceTest`: Test book creation, update, deletion, and fetching.
+- `OrderControllerTest`: Validate admin order status update API.
+- `AccountControllerTest`: Test account retrieval and update for a user.
+- `AIChatControllerTest`: Simulate AI responses and test streaming behavior.
+- `ContactServiceTest`: Test contact message storage and retrieval.
+
+---
+
+### 🚀 How to Run Tests
+
+With Maven:
+
+```bash
+./mvnw test
+```
+
+With Gradle:
+
+```bash
+./gradlew test
+```
 
 # API Documention
 
