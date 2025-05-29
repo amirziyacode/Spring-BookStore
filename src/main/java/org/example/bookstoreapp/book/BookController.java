@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/book")
-@CrossOrigin("http://localhost:3000")
 public class BookController {
 
     private final BookService bookService;
@@ -39,5 +38,10 @@ public class BookController {
     @GetMapping("findBestSeller")
     public ResponseEntity<List<Book>> getBestSeller(@RequestParam int books) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findBestSeller(books));
+    }
+
+    @GetMapping("getAllBooksByQuery")
+    public ResponseEntity<List<Book>> getAllBooksByQuery(@RequestParam String query) {
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllBooksByQuery(query));
     }
 }
