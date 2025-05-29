@@ -4,7 +4,6 @@ package org.example.bookstoreapp.book;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,7 +17,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Collections;
 import java.util.List;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
@@ -97,7 +95,7 @@ class BookControllerTest {
 
         List<Book> books = Collections.singletonList(mockBook);
 
-        Mockito.when(bookService.findByCategory(String.valueOf(mockBook.getCategory()))).thenReturn(books);
+        when(bookService.findByCategory(String.valueOf(mockBook.getCategory()))).thenReturn(books);
 
 
         mockMvc.perform(get("http://localhost:8080/api/book/getByCategory")
@@ -121,7 +119,7 @@ class BookControllerTest {
 
     @Test
     void find_book_by_id() throws Exception {
-        Mockito.when(bookService.findById(mockBook.getId())).thenReturn(mockBook);
+        when(bookService.findById(mockBook.getId())).thenReturn(mockBook);
 
         mockMvc.perform(get("http://localhost:8080/api/book/getById")
                 .param("id", Integer.toString(mockBook.getId()))
@@ -143,11 +141,33 @@ class BookControllerTest {
     }
     @Test
     void get_books_by_bestSeller() throws Exception {
-        Mockito.when(bookService.findBestSeller(anyInt())).thenReturn(Collections.singletonList(mockBook));
+        when(bookService.findBestSeller(anyInt())).thenReturn(Collections.singletonList(mockBook));
         mockMvc.perform(get("http://localhost:8080/api/book/findBestSeller")
                 .param("books",Integer.toString(1))
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].title").value("Grokking Algorithms"))
+                .andExpect(jsonPath("[0].author").value("Aditya Y. Bhargava"))
+                .andExpect(jsonPath("[0].price").value(28.99))
+                .andExpect(jsonPath("[0].discount").value(10))
+                .andExpect(jsonPath("[0].isNew").value(true))
+                .andExpect(jsonPath("[0].rating").value(5))
+                .andExpect(jsonPath("[0].publisher").value("Manning"))
+                .andExpect(jsonPath("[0].language").value("English"))
+                .andExpect(jsonPath("[0].category").value("COMPUTER_SCIENCE"))
+                .andExpect(jsonPath("[0].isbn").value("9781633438538"))
+                .andExpect(jsonPath("[0].year").value(2024))
+                .andExpect(jsonPath("[0].paperback").value(322))
+                .andExpect(jsonPath("[0]..description").value("description"));
+    }
+
+    @Test
+    void should_getAllBooksByQuery_success() throws Exception {
+        when(bookService.getAllBooksByQuery("gr")).thenReturn(Collections.singletonList(mockBook));
+        mockMvc.perform(get("http://localhost:8080/api/book/getAllBooksByQuery")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("query","gr"))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].title").value("Grokking Algorithms"))
                 .andExpect(jsonPath("[0].author").value("Aditya Y. Bhargava"))
                 .andExpect(jsonPath("[0].price").value(28.99))

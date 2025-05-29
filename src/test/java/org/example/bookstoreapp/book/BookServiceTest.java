@@ -101,4 +101,15 @@ class BookServiceTest {
         when(bookService.findBestSeller(1)).thenReturn(Collections.singletonList(mockBook));
         assertEquals(List.of(mockBook), bookService.findBestSeller(1));
     }
+
+    @Test
+    void should_getAllBooksByQuery_and_return_books(){
+        when(bookRepo.findAllBooksByParameter(anyString())).thenReturn(Collections.singletonList(mockBook));
+
+        List<Book> getBooks = bookService.getAllBooksByQuery("gr");
+
+        assertEquals(1, getBooks.size());
+        assertEquals(mockBook, getBooks.get(0));
+        verify(bookRepo, times(1)).findAllBooksByParameter("gr");
+    }
 }

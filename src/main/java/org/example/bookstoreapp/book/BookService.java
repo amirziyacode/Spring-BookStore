@@ -6,12 +6,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true) // => for big text is come from database !!
 public class BookService {
 
     private final BookRepo bookRepo;
@@ -43,11 +46,6 @@ public class BookService {
     }
 
     public List<Book> getAllBooksByQuery(String query) {
-        return bookRepo.findAll()
-                .stream()
-                .filter(book ->
-                        book.getTitle().toLowerCase()
-                                .contains(query.toLowerCase()))
-                .collect(Collectors.toList());
+        return bookRepo.findAllBooksByParameter(query);
     }
 }

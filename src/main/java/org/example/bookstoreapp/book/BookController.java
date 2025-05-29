@@ -24,7 +24,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(books);
     }
 
-    @Transactional // => for big text is come from database !!
+
     @GetMapping("getByCategory")
     public ResponseEntity<List<Book>> getByCategory(@RequestParam String category) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findByCategory(category));
@@ -42,6 +42,6 @@ public class BookController {
 
     @GetMapping("getAllBooksByQuery")
     public ResponseEntity<List<Book>> getAllBooksByQuery(@RequestParam String query) {
-        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllBooksByQuery(query));
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllBooksByQuery(query.trim()));
     }
 }

@@ -76,4 +76,21 @@ class BookRepoTest {
         assertThat(byCategory.get().get(0).getPublisher()).isEqualTo(mockBook.getPublisher());
         assertThat(byCategory.get().get(0).getCategory()).isEqualTo(mockBook.getCategory());
     }
+
+    @Test
+    void should_findAllBooksByParameter_and_returned(){
+        bookRepo.save(mockBook);
+        List<Book> bySearch = bookRepo.findAllBooksByParameter("gr");
+
+
+        assertThat(bySearch.size()).isEqualTo(1);
+        assertThat(bySearch.get(0).getTitle()).isEqualTo(mockBook.getTitle());
+        assertThat(bySearch.get(0).getAuthor()).isEqualTo(mockBook.getAuthor());
+        assertThat(bySearch.get(0).getCoverImage()).isEqualTo(mockBook.getCoverImage());
+        assertThat(bySearch.get(0).getPrice()).isEqualTo(mockBook.getPrice());
+        assertThat(bySearch.get(0).getDiscount()).isEqualTo(mockBook.getDiscount());
+        assertThat(bySearch.get(0).getRating()).isEqualTo(mockBook.getRating());
+        assertThat(bySearch.get(0).getPublisher()).isEqualTo(mockBook.getPublisher());
+        assertThat(bySearch.get(0).getCategory()).isEqualTo(mockBook.getCategory());
+    }
 }
