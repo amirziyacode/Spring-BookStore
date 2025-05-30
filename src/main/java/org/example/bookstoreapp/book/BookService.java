@@ -42,7 +42,7 @@ public class BookService {
     }
 
     public List<Book> findBestSeller(int books) {
-        return bookRepo.findAll().stream().filter(Book::isBestseller).limit(books).collect(Collectors.toList());
+        return bookRepo.findBestSeller().stream().limit(books).collect(Collectors.toList());
     }
 
     public List<Book> getAllBooksByQuery(String query) {

@@ -20,5 +20,8 @@ public interface BookRepo extends JpaRepository<Book, Integer> {
 
     @Query("SELECT b FROM Book_model b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Book> findAllBooksByParameter(@Param("query") String query);
+
+    @Query("SELECT b FROM Book_model  b where b.isBestseller = true")
+    List<Book> findBestSeller();
 }
 

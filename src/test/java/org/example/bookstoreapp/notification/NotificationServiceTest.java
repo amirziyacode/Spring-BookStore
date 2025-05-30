@@ -78,7 +78,7 @@ class NotificationServiceTest {
 
 
        assertThat(notifications).hasSize(1);
-       verify(notificationRepo,times(5)).findByEmail(user.getEmail());
+       verify(notificationRepo, times(1)).delete(notification);
     }
 
     @Test

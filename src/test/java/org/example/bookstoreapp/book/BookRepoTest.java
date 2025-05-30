@@ -29,6 +29,7 @@ class BookRepoTest {
                 .coverImage("coverImage")
                 .price(28.99)
                 .discount(10)
+                .isBestseller(true)
                 .isNew(true)
                 .rating(5)
                 .isBestseller(true)
@@ -93,4 +94,13 @@ class BookRepoTest {
         assertThat(bySearch.get(0).getPublisher()).isEqualTo(mockBook.getPublisher());
         assertThat(bySearch.get(0).getCategory()).isEqualTo(mockBook.getCategory());
     }
-}
+
+    @Test
+    void should_findBestSeller_and_returned(){
+        bookRepo.save(mockBook);
+        List<Book> bySearch = bookRepo.findBestSeller();
+
+        assertThat(bySearch.size()).isEqualTo(1);
+        assertThat(mockBook).isEqualTo(bySearch.get(0));
+    }
+    }
