@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.modelDTO.UserDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

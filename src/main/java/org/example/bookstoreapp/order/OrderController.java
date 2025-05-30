@@ -1,8 +1,8 @@
 package org.example.bookstoreapp.order;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.dto.OrderDTO;
-import org.example.bookstoreapp.dto.OrderResponse;
+import org.example.bookstoreapp.modelDTO.OrderDTO;
+import org.example.bookstoreapp.modelDTO.OrderResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

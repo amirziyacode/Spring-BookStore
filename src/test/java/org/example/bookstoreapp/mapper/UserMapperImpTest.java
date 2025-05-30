@@ -3,7 +3,7 @@ package org.example.bookstoreapp.mapper;
 
 
 import org.assertj.core.api.Assertions;
-import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.modelDTO.UserDTO;
 import org.example.bookstoreapp.user.Role;
 import org.example.bookstoreapp.user.User;
 import org.example.bookstoreapp.user.UserResponse;

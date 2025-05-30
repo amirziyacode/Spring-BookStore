@@ -1,6 +1,6 @@
 package org.example.bookstoreapp.user;
 
-import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.modelDTO.UserDTO;
 import org.example.bookstoreapp.mapper.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

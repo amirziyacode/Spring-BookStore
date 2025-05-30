@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.user;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.modelDTO.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class AccountController {
     }
 
     @PutMapping("setAccount")
-    public ResponseEntity<String> accountDetails(@RequestParam String email, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> setAccountDetails(@RequestParam String email, @RequestBody UserDTO userDTO) {
         return  ResponseEntity.status(HttpStatus.OK).body(accountService.setAccountDetails(email,userDTO));
     }
 }

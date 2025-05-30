@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.order;
 
-import org.example.bookstoreapp.dto.OrderDTO;
-import org.example.bookstoreapp.dto.OrderResponse;
+import org.example.bookstoreapp.modelDTO.OrderDTO;
+import org.example.bookstoreapp.modelDTO.OrderResponse;
 import org.example.bookstoreapp.mapper.OrderMapper;
 import org.example.bookstoreapp.notification.Notification;
 import org.example.bookstoreapp.notification.NotificationService;

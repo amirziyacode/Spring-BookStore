@@ -1,8 +1,8 @@
 package org.example.bookstoreapp.order;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.bookstoreapp.dto.OrderDTO;
-import org.example.bookstoreapp.dto.OrderResponse;
+import org.example.bookstoreapp.modelDTO.OrderDTO;
+import org.example.bookstoreapp.modelDTO.OrderResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

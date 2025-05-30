@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.dto;
+package org.example.bookstoreapp.modelDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import org.example.bookstoreapp.order.OrderItem;
 import org.example.bookstoreapp.order.OrderStatus;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data

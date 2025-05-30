@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.contact;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.bookstoreapp.dto.ContactDTO;
+import org.example.bookstoreapp.modelDTO.ContactDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

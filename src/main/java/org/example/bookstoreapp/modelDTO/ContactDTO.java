@@ -1,4 +1,4 @@
-package org.example.bookstoreapp.dto;
+package org.example.bookstoreapp.modelDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

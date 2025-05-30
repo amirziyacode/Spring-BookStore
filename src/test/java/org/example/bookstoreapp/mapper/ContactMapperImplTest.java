@@ -1,8 +1,7 @@
 package org.example.bookstoreapp.mapper;
 
-import org.assertj.core.api.Assertions;
 import org.example.bookstoreapp.contact.Contact;
-import org.example.bookstoreapp.dto.ContactDTO;
+import org.example.bookstoreapp.modelDTO.ContactDTO;
 import org.example.bookstoreapp.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

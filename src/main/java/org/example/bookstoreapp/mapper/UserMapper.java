@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.mapper;
 
 import org.example.bookstoreapp.user.UserResponse;
-import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.modelDTO.UserDTO;
 import org.example.bookstoreapp.user.User;
 
 import java.util.List;

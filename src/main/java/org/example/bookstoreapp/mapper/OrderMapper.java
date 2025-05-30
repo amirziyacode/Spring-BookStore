@@ -2,8 +2,8 @@ package org.example.bookstoreapp.mapper;
 
 import org.example.bookstoreapp.order.OrderDetails;
 import org.example.bookstoreapp.order.OrderItemDetails;
-import org.example.bookstoreapp.dto.OrderDTO;
-import org.example.bookstoreapp.dto.OrderResponse;
+import org.example.bookstoreapp.modelDTO.OrderDTO;
+import org.example.bookstoreapp.modelDTO.OrderResponse;
 import org.example.bookstoreapp.order.Order;
 import org.example.bookstoreapp.order.OrderItem;
 

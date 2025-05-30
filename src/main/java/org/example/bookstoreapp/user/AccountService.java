@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.user;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.dto.UserDTO;
+import org.example.bookstoreapp.modelDTO.UserDTO;
 import org.example.bookstoreapp.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package org.example.bookstoreapp.contact;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.bookstoreapp.dto.ContactDTO;
+import org.example.bookstoreapp.modelDTO.ContactDTO;
 import org.example.bookstoreapp.mapper.ContactMapper;
 import org.example.bookstoreapp.mapper.ContactMapperImpl;
 import org.example.bookstoreapp.notification.Notification;

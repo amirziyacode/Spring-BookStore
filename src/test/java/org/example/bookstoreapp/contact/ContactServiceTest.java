@@ -1,6 +1,6 @@
 package org.example.bookstoreapp.contact;
 
-import org.example.bookstoreapp.dto.ContactDTO;
+import org.example.bookstoreapp.modelDTO.ContactDTO;
 import org.example.bookstoreapp.mapper.ContactMapper;
 import org.example.bookstoreapp.mapper.ContactMapperImpl;
 import org.example.bookstoreapp.notification.Notification;

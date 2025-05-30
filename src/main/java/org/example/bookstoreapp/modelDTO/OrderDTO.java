@@ -1,8 +1,7 @@
-package org.example.bookstoreapp.dto;
+package org.example.bookstoreapp.modelDTO;
 import lombok.*;
 import org.example.bookstoreapp.order.OrderItem;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
