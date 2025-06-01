@@ -12,13 +12,6 @@ import reactor.core.publisher.Flux;
 public class ChatService {
 
     private final WebClient webClient;
-
-    public ChatService(){
-        this.webClient = WebClient.builder()
-                .baseUrl("http://localhost:11434")
-                .build();
-    }
-
     public Flux<String> sendMassage(String message) {
         String body  = """
             {

@@ -33,7 +33,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("api/book/**","/api/auth/**","api/ai/ask-bot").permitAll()
+                                .requestMatchers("api/book/**","/api/auth/**" ,"/swagger-ui/**", "/v3/api-docs/**",
+                                        "/swagger-resources/**").permitAll()
                                 .requestMatchers("api/admin/**").hasAnyAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
 
