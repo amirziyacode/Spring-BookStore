@@ -54,6 +54,15 @@ Check out the deployed frontend here: [https://ai-book-store-jyd2.vercel.app/](h
 
 ---
 
+## API Documentation
+
+Swagger UI is available at the following URL after running the application:
+
+[http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
+
+You can use it to explore and test the available REST endpoints of this project.
+
+
 
 ## 🚀 Getting Started
 
