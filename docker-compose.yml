@@ -1,14 +1,14 @@
 version: '3.8'
 services:
   postgres:
-    image: postgres:17
+    image: postgres:16
     container_name: spring_postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: amirziya
+      POSTGRES_PASSWORD: yourPassword
       POSTGRES_DB: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -18,9 +18,9 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydb
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: yourPassword
     ports:
       - "8080:8080"
 
