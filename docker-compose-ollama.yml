@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    command: >
+      bash -c "ollama serve & sleep 5 && ollama pull gemma"
+
+volumes:
+  ollama_data:
