@@ -1,6 +1,9 @@
 package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import lombok.RequiredArgsConstructor;
+import org.example.bookstoreapp.emialVerification.EmailService;
+import org.example.bookstoreapp.emialVerification.VerificationCode;
+import org.example.bookstoreapp.emialVerification.VerificationCodeService;
 import org.example.bookstoreapp.jwtToken.JwtService;
 import org.example.bookstoreapp.jwtToken.Token;
 import org.example.bookstoreapp.jwtToken.TokenType;
@@ -26,10 +29,11 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final TokenRepo tokenRepo;
+    private final VerificationCodeService verificationCodeService;
+    private final EmailService emailService;
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         Optional<User> byEmail = userRepo.findByEmail(registerRequest.getEmail());
-
         if(byEmail.isEmpty()) {
             User buildUser = User.builder()
                     .fullName(registerRequest.getFullName())
@@ -39,7 +43,9 @@ public class AuthenticationService {
                     .isActive(true)
                     .createdAt(LocalDate.now())
                     .build();
+
             userRepo.save(buildUser);
+            sendVerificationCodeByEmail(buildUser);
             String token = jwtService.generateToken(buildUser);
             revokeAllUserTokens(buildUser);
             saveUserToken(token, buildUser);
@@ -49,6 +55,11 @@ public class AuthenticationService {
         }else {
             throw new IllegalArgumentException("Email already in use");
         }
+    }
+
+    private void sendVerificationCodeByEmail(User user) {
+        VerificationCode verificationCode = verificationCodeService.generateVerificationCode(user);
+        emailService.sendVarificationCode(user.getEmail(),verificationCode.getCode());
     }
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
