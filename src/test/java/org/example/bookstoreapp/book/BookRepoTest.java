@@ -1,6 +1,7 @@
 package org.example.bookstoreapp.book;
 
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,4 +104,9 @@ class BookRepoTest {
         assertThat(bySearch.size()).isEqualTo(1);
         assertThat(mockBook).isEqualTo(bySearch.get(0));
     }
+
+    @AfterEach
+    void deleteAll() {
+        bookRepo.deleteAll();
     }
+}
