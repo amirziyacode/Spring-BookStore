@@ -31,4 +31,10 @@ public class AuthenticationController {
         }
         return ResponseEntity.badRequest().body("Invalid or expired code !");
     }
+
+    @GetMapping("resend-code")
+    public ResponseEntity<String> resendCode(@RequestParam String email){
+        verificationCodeService.resendCode(email);
+        return ResponseEntity.ok("Resend code successfully to " + email + "!");
+    }
 }

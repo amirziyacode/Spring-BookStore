@@ -5,7 +5,9 @@ import org.example.bookstoreapp.user.User;
 import org.example.bookstoreapp.user.UserRepo;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,7 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class VerificationCodeService {
 
-    private final VerificationRepository verificationRepository;
+    private final VerificationCodeRepository verificationRepository;
+    private final EmailService emailService;
     private final UserRepo userRepo;
 
     public VerificationCode generateVerificationCode(User user) {
@@ -45,6 +48,27 @@ public class VerificationCodeService {
         }
 
         return false;
+    }
+
+    @Transactional
+    public void resendCode(String email) {
+        User user = userRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if(user.isActive()) {
+            throw new IllegalStateException("User is already active");
+        }
+
+        expireAllVerificationCodes(email);
+        VerificationCode verificationCode = generateVerificationCode(user);
+        emailService.sendVarificationCode(email, verificationCode.getCode());
+    }
+
+    private void expireAllVerificationCodes(String email) {
+        List<VerificationCode> verificationCodeByEmail = verificationRepository.findByUserEmail(email);
+        verificationCodeByEmail.forEach(verificationCode -> {
+            verificationCode.setUsed(true);
+            verificationRepository.save(verificationCode);
+        });
     }
 
     private static boolean isCodeActiveAndNotExpired(VerificationCode byCodeAndUserEmail) {

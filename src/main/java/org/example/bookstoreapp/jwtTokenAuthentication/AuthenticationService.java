@@ -40,7 +40,6 @@ public class AuthenticationService {
                     .email(registerRequest.getEmail())
                     .password(passwordEncoder.encode(registerRequest.getPassword()))
                     .role(Role.USER)
-                    .isActive(true)
                     .createdAt(LocalDate.now())
                     .build();
 

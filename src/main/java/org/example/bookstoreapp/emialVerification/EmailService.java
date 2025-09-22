@@ -16,7 +16,7 @@ public class EmailService {
     @Async
     public void sendVarificationCode(String to, String code){
         String subject = "Account Verification Code";
-        String body = "<h2>Welcome!</h2>"
+        String body = "<h2>Welcome to the Spring Book Store!</h2>"
                 + "<p>Your verification code is: <b>" + code + "</b></p>"
                 + "<p>This code will expire in 5 minutes.</p>";
 

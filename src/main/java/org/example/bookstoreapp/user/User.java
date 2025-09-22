@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.bookstoreapp.contact.Contact;
+import org.example.bookstoreapp.emialVerification.VerificationCode;
 import org.example.bookstoreapp.jwtToken.Token;
 import org.example.bookstoreapp.notification.Notification;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,6 +50,9 @@ public class User  implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
+
+    @OneToMany(mappedBy = "user")
+    private List<VerificationCode> verificationCodes;
 
     @CreationTimestamp
     private LocalDate createdAt;

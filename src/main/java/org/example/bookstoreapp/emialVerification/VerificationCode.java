@@ -22,7 +22,8 @@ public class VerificationCode {
 
     private String code;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     private LocalDateTime expireTime;
