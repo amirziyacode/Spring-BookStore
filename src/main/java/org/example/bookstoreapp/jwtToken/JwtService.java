@@ -5,17 +5,23 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+import org.example.bookstoreapp.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
+
+    private final TokenRepo tokenRepo;
 
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
@@ -79,6 +85,26 @@ public class JwtService {
     private Key getSignInkey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public void revokeAllUserTokens(User user) {
+        List<Token> allValidTokensByUser = tokenRepo.findAllValidTokensByUser(user.getId());
+        if(allValidTokensByUser.isEmpty()) {
+            return;
+        }
+        allValidTokensByUser.forEach(token -> token.setRevoked(true));
+        tokenRepo.saveAll(allValidTokensByUser);
+
+    }
+
+    public void saveUserToken(String token, User user) {
+        Token buildToken = Token.builder()
+                .token(token)
+                .user(user)
+                .revoked(false)
+                .tokenType(TokenType.BEARER)
+                .build();
+        tokenRepo.save(buildToken);
     }
 
 

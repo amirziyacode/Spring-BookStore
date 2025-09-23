@@ -5,61 +5,61 @@ import org.example.bookstoreapp.emialVerification.EmailService;
 import org.example.bookstoreapp.emialVerification.VerificationCode;
 import org.example.bookstoreapp.emialVerification.VerificationCodeService;
 import org.example.bookstoreapp.jwtToken.JwtService;
-import org.example.bookstoreapp.jwtToken.Token;
-import org.example.bookstoreapp.jwtToken.TokenType;
-import org.example.bookstoreapp.jwtToken.TokenRepo;
 import org.example.bookstoreapp.user.UserRepo;
 import org.example.bookstoreapp.user.Role;
 import org.example.bookstoreapp.user.User;
+import org.example.bookstoreapp.user.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+    private final UserService userService;
     private final UserRepo userRepo;
-    private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final TokenRepo tokenRepo;
     private final VerificationCodeService verificationCodeService;
     private final EmailService emailService;
 
+    /**
+     * This Method for Create User is not Excite in Database
+     * Save User in Database
+     * Generate JWT Token and Revoke All Tokens for one User
+     * Save JWT Token in Database
+     * Generate Verification Code and Send it by Email for verify Account
+     *
+     * @param registerRequest include (fullName,Email,Password)
+     * @return AuthenticationResponse include JWT Token
+     */
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         Optional<User> byEmail = userRepo.findByEmail(registerRequest.getEmail());
         if(byEmail.isEmpty()) {
-            User buildUser = User.builder()
-                    .fullName(registerRequest.getFullName())
-                    .email(registerRequest.getEmail())
-                    .password(passwordEncoder.encode(registerRequest.getPassword()))
-                    .role(Role.USER)
-                    .createdAt(LocalDate.now())
-                    .build();
+            try {
+                User user = userService.createUser(registerRequest);
 
-            userRepo.save(buildUser);
-            sendVerificationCodeByEmail(buildUser);
-            String token = jwtService.generateToken(buildUser);
-            revokeAllUserTokens(buildUser);
-            saveUserToken(token, buildUser);
-            return AuthenticationResponse.builder()
-                    .token(token)
-                    .build();
+                emailService.sendVerificationCodeByEmail(user);
+
+                String token = jwtService.generateToken(user);
+
+                jwtService.revokeAllUserTokens(user);
+
+                jwtService.saveUserToken(token, user);
+
+                return AuthenticationResponse.builder()
+                        .token(token)
+                        .build();
+            }catch (Exception e) {
+                throw new RuntimeException("Failed to register user: " + e.getMessage());
+            }
         }else {
             throw new IllegalArgumentException("Email already in use");
         }
     }
 
-    private void sendVerificationCodeByEmail(User user) {
-        VerificationCode verificationCode = verificationCodeService.generateVerificationCode(user);
-        emailService.sendVarificationCode(user.getEmail(),verificationCode.getCode());
-    }
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
         authenticationManager.authenticate(
@@ -76,8 +76,8 @@ public class AuthenticationService {
                         .equals(Role.ADMIN));
         if(userEmail.isPresent()) {
             String token = jwtService.generateToken(userEmail.get());
-            revokeAllUserTokens(userEmail.get());
-            saveUserToken(token, userEmail.get());
+            jwtService.revokeAllUserTokens(userEmail.get());
+            jwtService.saveUserToken(token, userEmail.get());
             return AuthenticationResponse.builder()
                     .token(token)
                     .isAdmin(true)
@@ -85,30 +85,14 @@ public class AuthenticationService {
         }
         return userRepo.findByEmail(authenticationRequest.getEmail()).map(user -> {
             String token = jwtService.generateToken(user);
-            revokeAllUserTokens(user);
-            saveUserToken(token, user);
+            jwtService.revokeAllUserTokens(user);
+            jwtService.saveUserToken(token, user);
             return AuthenticationResponse.builder().token(token).build();
         })
                 .orElseThrow(() -> new UsernameNotFoundException("User"+authenticationRequest.getEmail()+"not found"));
     }
 
-    private void revokeAllUserTokens(User user) {
-        List<Token> allValidTokensByUser = tokenRepo.findAllValidTokensByUser(user.getId());
-        if(allValidTokensByUser.isEmpty()) {
-            return;
-        }
-        allValidTokensByUser.forEach(token -> token.setRevoked(true));
-        tokenRepo.saveAll(allValidTokensByUser);
 
-    }
 
-    private void saveUserToken(String token, User user) {
-        Token buildToken = Token.builder()
-                .token(token)
-                .user(user)
-                .revoked(false)
-                .tokenType(TokenType.BEARER)
-                .build();
-        tokenRepo.save(buildToken);
-    }
+
 }

@@ -1,12 +1,14 @@
 package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import org.assertj.core.api.Assertions;
+import org.example.bookstoreapp.emialVerification.EmailService;
+import org.example.bookstoreapp.emialVerification.VerificationCode;
+import org.example.bookstoreapp.emialVerification.VerificationCodeService;
 import org.example.bookstoreapp.jwtToken.JwtService;
-import org.example.bookstoreapp.jwtToken.Token;
-import org.example.bookstoreapp.jwtToken.TokenRepo;
 import org.example.bookstoreapp.user.Role;
 import org.example.bookstoreapp.user.User;
 import org.example.bookstoreapp.user.UserRepo;
+import org.example.bookstoreapp.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +18,9 @@ import org.mockito.Mock;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -30,10 +29,11 @@ import static org.mockito.Mockito.*;
 class AuthenticationServiceTest {
 
     @Mock private UserRepo userRepo;
-    @Mock private PasswordEncoder passwordEncoder;
+    @Mock private UserService userService;
     @Mock private JwtService jwtService;
     @Mock private AuthenticationManager authenticationManager;
-    @Mock private TokenRepo tokenRepo;
+    @Mock private VerificationCodeService verificationCodeService;
+    @Mock private EmailService emailService;
 
     @InjectMocks
     private AuthenticationService authenticationService;
@@ -42,6 +42,7 @@ class AuthenticationServiceTest {
     private RegisterRequest registerRequest;
     private AuthenticationRequest  authenticationRequest;
     private User user;
+    private VerificationCode verificationCode;
     private static final String TOKEN = "mocked-jwt-token";
 
     @BeforeEach
@@ -64,48 +65,35 @@ class AuthenticationServiceTest {
                 .role(Role.USER)
                 .password("password123")
                 .build();
+
+        verificationCode = VerificationCode.builder()
+                .code("code")
+                .expireTime(LocalDateTime.now().plusMinutes(3))
+                .used(false)
+                .user(user)
+                .build();
     }
 
     @Test
-    void should_register_a_user_and_generateToken() {
+    @DisplayName("registerUserSuccessfully")
+    void should_registerUserSuccessfully_and_sendVerificationCode_By_Email_generate_JWT_TOKEN() {
 
         when(userRepo.findByEmail(registerRequest.getEmail())).thenReturn(Optional.empty());
-        when(passwordEncoder.encode(registerRequest.getPassword())).thenReturn("encodedPassword");
-        when(jwtService.generateToken(any(User.class))).thenReturn("mocked-jwt-token");
-
-
-        AuthenticationResponse response = authenticationService.register(registerRequest);
-
-        assertNotNull(response);
-        assertEquals("mocked-jwt-token", response.getToken());
-        verify(userRepo).save(any(User.class));
-        verify(tokenRepo).save(any(Token.class));
-    }
-
-    @Test
-    @DisplayName("revoke_all_tokens")
-    void should_register_user_and_revoke_all_token_already_excite(){
-
-
-        Token mockToken = Token.builder()
-                .revoked(false)
-                .user(user)
-                .token(TOKEN)
-                .build();
-
-        when(tokenRepo.findAllValidTokensByUser(user.getId())).thenReturn(List.of(mockToken));
-        when(userRepo.findByEmail(user.getEmail())).thenReturn(Optional.empty());
         when(jwtService.generateToken(any(User.class))).thenReturn(TOKEN);
+        when(userService.createUser(any(RegisterRequest.class))).thenReturn(user);
+        when(verificationCodeService.generateVerificationCode(user)).thenReturn(verificationCode);
 
         AuthenticationResponse response = authenticationService.register(registerRequest);
 
         assertNotNull(response);
         assertEquals(TOKEN, response.getToken());
-        verify(userRepo).save(any(User.class));
-        verify(tokenRepo).save(any(Token.class));
 
+        verify(userService).createUser(registerRequest);
+        verify(jwtService).generateToken(user);
+        verify(jwtService).revokeAllUserTokens(user);
+        verify(jwtService).saveUserToken(TOKEN, user);
+        verify(emailService,times(1)).sendVerificationCodeByEmail(user);
     }
-
 
     @Test
     void should_register_user_and_email_excite(){
@@ -128,6 +116,8 @@ class AuthenticationServiceTest {
 
         assertNotNull(response);
         assertEquals(TOKEN, response.getToken());
+        verify(jwtService).revokeAllUserTokens(user);
+        verify(jwtService).saveUserToken(TOKEN, user);
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtService).generateToken(user);
     }
@@ -137,5 +127,36 @@ class AuthenticationServiceTest {
         UsernameNotFoundException usernameNotFoundException = assertThrows(UsernameNotFoundException.class, () -> authenticationService.login(authenticationRequest));
         Assertions.assertThat(usernameNotFoundException.getMessage()).isEqualTo("User"+authenticationRequest.getEmail()+"not found");
 
+    }
+
+    @Test
+    void should_throwRuntimeException_whenCreateUserFails() {
+
+        when(userRepo.findByEmail("test@gmail.com")).thenReturn(Optional.empty());
+        when(userService.createUser(registerRequest)).thenThrow(new RuntimeException("DB error"));
+
+        RuntimeException ex = assertThrows(RuntimeException.class,
+                () -> authenticationService.register(registerRequest));
+
+        assertTrue(ex.getMessage().contains("Failed to register user"));
+    }
+
+    @Test
+    void should_login_adminPanel(){
+        User admin = User.builder()
+                .fullName("Admin")
+                .password("1234")
+                .role(Role.ADMIN)
+                .build();
+
+        when(userRepo.findByEmail(authenticationRequest.getEmail())).thenReturn(Optional.of(admin));
+        when(jwtService.generateToken(admin)).thenReturn(TOKEN);
+
+        AuthenticationResponse adminLogin = authenticationService.login(authenticationRequest);
+
+        assertThat(adminLogin).isEqualTo(AuthenticationResponse.builder().token(TOKEN).isAdmin(true).build());
+        verify(jwtService,times(1)).generateToken(admin);
+        verify(jwtService).revokeAllUserTokens(admin);
+        verify(jwtService).saveUserToken(TOKEN, admin);
     }
 }
