@@ -36,6 +36,7 @@ class UserServiceTest {
 
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
         verify(userRepo,times(1)).save(captor.capture());
+        verify(passwordEncoder,times(1)).encode(registerRequest.getPassword());
         User actualUser = captor.getValue();
 
         assertThat(actualUser.getFullName()).isEqualTo(registerRequest.getFullName());
