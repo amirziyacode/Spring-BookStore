@@ -2,6 +2,7 @@ package org.example.bookstoreapp.jwtTokenAuthentication;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.bookstoreapp.emialVerification.VerificationCodeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    private final VerificationCodeService verificationCodeService;
 
     @PostMapping("register")
     public ResponseEntity<AuthenticationResponse>  register(@RequestBody RegisterRequest request) {
@@ -20,5 +22,19 @@ public class AuthenticationController {
     @PostMapping("login")
     private ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.login(request));
+    }
+
+    @GetMapping("verify")
+    public ResponseEntity<String> verifyAccount(@RequestParam String email, @RequestParam String code){
+        if(verificationCodeService.verifyCode(email, code)){
+            return ResponseEntity.ok("Account activated successfully");
+        }
+        return ResponseEntity.badRequest().body("Invalid or expired code !");
+    }
+
+    @GetMapping("resend-code")
+    public ResponseEntity<String> resendCode(@RequestParam String email){
+        verificationCodeService.resendCode(email);
+        return ResponseEntity.ok("Resend code successfully to " + email + "!");
     }
 }

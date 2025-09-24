@@ -1,15 +1,18 @@
 package org.example.bookstoreapp.jwtToken;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.bookstoreapp.user.Role;
+import org.example.bookstoreapp.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import java.util.Base64;
-
+import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -19,6 +22,8 @@ import static org.mockito.Mockito.*;
 class JwtServiceTest {
 
 
+    @Mock
+    private TokenRepo tokenRepo;
     private JwtService jwtService;
 
 
@@ -26,7 +31,7 @@ class JwtServiceTest {
 
     @BeforeEach
     void setUp() {
-        jwtService = new JwtService();
+        jwtService = new JwtService(tokenRepo);
         ReflectionTestUtils.setField(jwtService, "secretKey", secret);
         // 1 hour
         long expiration = 2000L;
@@ -66,5 +71,60 @@ class JwtServiceTest {
         Thread.sleep(3000); // let expired
 
         assertThat(jwtService.isTokenValid(token, userDetails)).isFalse();
+    }
+    @Test
+    void revokeAllUserTokens_shouldMarkAllTokensAsRevoked() {
+        User user = User.builder()
+                .id(1)
+                .fullName("amirali")
+                .role(Role.USER)
+                .password("password")
+                .email("test@gmail.com")
+                .build();
+
+        List<Token> tokens = List.of(
+                Token.builder()
+                        .token("token")
+                        .revoked(false)
+                        .user(user)
+                .build(),
+                Token.builder()
+                .token("tokenTwo")
+                .revoked(false)
+                .user(user)
+                .build());
+
+        when(tokenRepo.findAllValidTokensByUser(1)).thenReturn(tokens);
+
+        jwtService.revokeAllUserTokens(user);
+
+
+        assertThat(tokens).allMatch(Token::getRevoked);
+        verify(tokenRepo, times(1)).findAllValidTokensByUser(anyInt());
+
+    }
+    @Test
+    void should_createToken_and_saveToken() {
+        String token = "token";
+        User user = User.builder()
+                .id(1)
+                .fullName("amirali")
+                .role(Role.USER)
+                .password("password")
+                .email("test@gmail.com")
+                .build();
+
+        jwtService.saveUserToken(token, user);
+
+
+
+        ArgumentCaptor<Token> argCaptor = ArgumentCaptor.forClass(Token.class);
+        verify(tokenRepo, times(1)).save(argCaptor.capture());
+        Token actualToken = argCaptor.getValue();
+        assertThat(actualToken.getToken()).isEqualTo(token);
+        assertThat(actualToken.getUser()).isEqualTo(user);
+        assertThat(actualToken.getRevoked()).isFalse();
+        assertThat(actualToken.getTokenType()).isEqualTo(TokenType.BEARER);
+
     }
 }

@@ -51,7 +51,7 @@ public class InsertBooks implements CommandLineRunner {
             Book grokAlgo = Book.builder()
                     .title("Grokking Algorithms")
                     .author("Aditya Y. Bhargava")
-                    .coverImage("https://skybooks.ir/images/productImages/Grokking-Algorithms_EB1709675048.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Grokking-Algorithms_EB1709675048.jpg")
                     .price(28.99)
                     .discount(10)
                     .createdAt(LocalDateTime.now())
@@ -85,7 +85,7 @@ public class InsertBooks implements CommandLineRunner {
                     .isbn("9781617294648")
                     .paperback(480)
                     .createdAt(LocalDateTime.now())
-                    .coverImage("https://skybooks.ir/images/productImages/GrokkingBitcoin1_Rs1657377051.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/GrokkingBitcoin1_Rs1657377051.jpg")
                     .description("If you think Bitcoin is just an alternative currency for geeks, it's time to think again. " +
                             "Grokking Bitcoin opens up this powerful distributed ledger system," +
                             " exploring the technology that enables applications both for Bitcoin-based financial transactions and using the blockchain for registering physical property ownership." +
@@ -104,7 +104,7 @@ public class InsertBooks implements CommandLineRunner {
                     .paperback(393)
                     .isbn("9781617296185")
                     .createdAt(LocalDateTime.now())
-                    .coverImage("https://skybooks.ir/images/productImages/GrokkingArtificialIntelligenceAlgorithms4_uI1657375595.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/GrokkingArtificialIntelligenceAlgorithms4_uI1657375595.jpg")
                     .rating(4.3)
                     .category(Category.COMPUTER_SCIENCE)
                     .description("Understand and Apply the Core Algorithms of Deep Learning and Artificial Intelligence in This Friendly Illustrated Guide Including Exercises and Examples " +
@@ -119,7 +119,7 @@ public class InsertBooks implements CommandLineRunner {
                     .title("Clean Code")
                     .author("Robert C. Martin")
                     .category(Category.COMPUTER_SCIENCE)
-                    .coverImage("https://skybooks.ir/images/productImages/CleanCode_hY1655407329.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/CleanCode_hY1655407329.jpg")
                     .rating(4.9)
                     .price(22.99)
                     .language("English")
@@ -138,7 +138,7 @@ public class InsertBooks implements CommandLineRunner {
             Book rustAction = Book.builder()
                     .title("Rust in Action")
                     .author("Timothy Samuel McNamara")
-                    .coverImage("https://skybooks.ir/images/productImages/Rust-in-Action_8D1662717972.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Rust-in-Action_8D1662717972.jpg")
                     .rating(4.4)
                     .price(36.4)
                     .discount(20)
@@ -163,7 +163,7 @@ public class InsertBooks implements CommandLineRunner {
                     .price(30.21)
                     .rating(4.6)
                     .category(Category.CRYPTOGRAPHY)
-                    .coverImage("https://skybooks.ir/images/productImages/Cryptology-For-Engineers_2O1715972130.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Cryptology-For-Engineers_2O1715972130.jpg")
                     .isbn("9789811208041")
                     .paperback(382)
                     .year(2020)
@@ -181,7 +181,7 @@ public class InsertBooks implements CommandLineRunner {
             Book springAction = Book.builder()
                     .title("Spring in Action")
                     .author("Craig Walls")
-                    .coverImage("https://skybooks.ir/images/productImages/Spring-Boot-in-Action_XD1659195012.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Spring-Boot-in-Action_XD1659195012.jpg")
                     .isbn("9781617292545")
                     .price(24.99)
                     .rating(4.2)
@@ -203,7 +203,7 @@ public class InsertBooks implements CommandLineRunner {
                     .title("Clean Architecture")
                     .author("Robert C. Martin")
                     .price(29.99)
-                    .coverImage("https://skybooks.ir/images/productImages/CleanArchitecture_1e1655814220.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/CleanArchitecture_1e1655814220.jpg")
                     .rating(4.1)
                     .year(2016)
                     .language("English")
@@ -224,7 +224,7 @@ public class InsertBooks implements CommandLineRunner {
             Book friends = Book.builder()
                     .title("Friends, Lovers, and the Big Terrible Thing")
                     .author("Matthew Perry")
-                    .coverImage("https://skybooks.ir/images/productImages/Friends-Lovers-and-the-Big-Terrible-Thing_eo1673459140.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Friends-Lovers-and-the-Big-Terrible-Thing_eo1673459140.jpg")
                     .price(28.99)
                     .rating(4.3)
                     .isBestseller(true)
@@ -257,7 +257,7 @@ public class InsertBooks implements CommandLineRunner {
                     .createdAt(LocalDateTime.now())
                     .paperback(320)
                     .year(2018)
-                    .coverImage("https://skybooks.ir/images/productImages/Atomic-Habits_E71670759776.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Atomic-Habits_E71670759776.jpg")
                     .description("An Easy & Proven Way to Build Good Habits & Break Bad Ones Tiny Changes," +
                             " Remarkable Results No matter your goals, Atomic Habits offers a proven framework for improving--every day. " +
                             "James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, " +
@@ -280,7 +280,7 @@ public class InsertBooks implements CommandLineRunner {
                     .isbn("9781544512280")
                     .paperback(297)
                     .year(2018)
-                    .coverImage("https://skybooks.ir/images/productImages/Cant-Hurt-Me_pU1691501515.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Cant-Hurt-Me_pU1691501515.jpg")
                     .description("For David Goggins, childhood was a nightmare -- poverty, prejudice, and physical abuse colored his days and haunted his nights. " +
                             "But through self-discipline, mental toughness, and hard work, " +
                             "Goggins transformed himself from a depressed, overweight young man with no future into a U.S. " +
@@ -291,7 +291,7 @@ public class InsertBooks implements CommandLineRunner {
             Book deepWork = Book.builder()
                     .title("Deep Work")
                     .author("Cal Newport")
-                    .coverImage("https://skybooks.ir/images/productImages/Deep-Work_eS1735691151.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Deep-Work_eS1735691151.jpg")
                     .year(2016)
                     .paperback(195)
                     .category(Category.MOTIVATION)
@@ -319,7 +319,7 @@ public class InsertBooks implements CommandLineRunner {
                     .rating(4)
                     .isbn("9798326456779")
                     .publisher("Independently Published")
-                    .coverImage("https://skybooks.ir/images/productImages/The-Effective-Product-Designer_xd1743764952.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/The-Effective-Product-Designer_xd1743764952.jpg")
                     .language("English")
                     .year(2024)
                     .isNew(true)
@@ -338,7 +338,7 @@ public class InsertBooks implements CommandLineRunner {
                     .author("Andrew Hoffman")
                     .isNew(true)
                     .paperback(444)
-                    .coverImage("https://skybooks.ir/images/productImages/Web-Application-Security_3K1706285538.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Web-Application-Security_3K1706285538.jpg")
                     .category(Category.COMPUTER_SCIENCE)
                     .year(2024)
                     .price(37.25)
@@ -368,7 +368,7 @@ public class InsertBooks implements CommandLineRunner {
                     .discount(20)
                     .rating(4.8)
                     .isbn("9780140280197")
-                    .coverImage("https://skybooks.ir/images/productImages/The-48-Laws-of-Power_sh1670770669.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/The-48-Laws-of-Power_sh1670770669.jpg")
                     .description("Amoral, cunning, ruthless, and instructive, this multi-million-copy New York Times bestseller is the definitive manual for anyone interested in gaining, observing, or defending against ultimate control – from the author of The Laws of Human Nature." +
                             "In the book that People magazine proclaimed “beguiling” and “fascinating,”" +
                             " Robert Greene and Joost Elffers have distilled three thousand years of the history of power into 48 essential laws by drawing from the philosophies of Machiavelli, Sun Tzu," +
@@ -392,7 +392,7 @@ public class InsertBooks implements CommandLineRunner {
                     .discount(10)
                     .rating(4.5)
                     .isbn("9781484230145")
-                    .coverImage("https://skybooks.ir/images/productImages/Java-Unit-Testing-with-JUnit-5_P31705682385.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Java-Unit-Testing-with-JUnit-5_P31705682385.jpg")
                     .description("Test Driven Development with JUnit 5 Explore the new way of building and maintaining test cases with Java test driven development (TDD) using JUnit 5. This book doesn't just talk about the new concepts, it shows you ways of applying them in TDD and Java 8 to continuously deliver code that excels in all metrics." +
                             "Unit testing and test driven development have now become part of every developer's skill set. For Java developers, the most popular testing tool has been JUnit, and JUnit 5 is built using the latest features of Java.  With Java Unit Testing with JUnit 5, you'll master these new features, including method parameters, extensions, assertions and assumptions, and dynamic tests. You'll also see how to write clean tests with less code. \n" +
                             "This book is a departure from using older practices and presents new ways of performing tests, building assertions, and injecting dependencies. ")
@@ -411,7 +411,7 @@ public class InsertBooks implements CommandLineRunner {
                     .year(2024)
                     .isNew(true)
                     .isbn("9781633437968")
-                    .coverImage("https://skybooks.ir/images/productImages/100-Java-Mistakes-and-How-to-Avoid-Them_F71713620446.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/100-Java-Mistakes-and-How-to-Avoid-Them_F71713620446.jpg")
                     .description("Whenever you make a mistake writing Java, it’s almost guaranteed that someone else has made it before! " +
                             "In 100 Java Mistakes and How To Avoid Them you’ll learn about the common and the not-so-common antipatterns, errors, and tricky bits that trip up almost every Java developer."+
                             "Inside 100 Java Mistakes and How To Avoid Them you will learn how to:" +
@@ -433,7 +433,7 @@ public class InsertBooks implements CommandLineRunner {
                     .rating(4.8)
                     .createdAt(LocalDateTime.now())
                     .isbn("9781617296086")
-                    .coverImage("https://skybooks.ir/images/productImages/Blockchain-in-Action_vK1665335406.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Blockchain-in-Action_vK1665335406.jpg")
                     .description("There’s a lot more to the blockchain than mining Bitcoin. This secure system for registering and verifying ownership and identity is perfect for supply chain logistics," +
                             " health records, and other sensitive data management tasks. Blockchain in Action unlocks the full potential of this revolutionary technology, " +
                             "showing you how to build your own decentralized apps for secure applications including digital democracy, private auctions, and electronic record management.\n" +
@@ -466,7 +466,7 @@ public class InsertBooks implements CommandLineRunner {
                     .year(2021)
                     .createdAt(LocalDateTime.now())
                     .isbn("9781492054702")
-                    .coverImage("https://skybooks.ir/images/productImages/MasteringBlockchain_Rp1656858129.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/MasteringBlockchain_Rp1656858129.jpg")
                     .description("Unlocking the Power of Cryptocurrencies, Smart Contracts, and Decentralized Applications The future will be increasingly distributed. " +
                             "As the publicity surrounding Bitcoin and blockchain has shown, distributed technology and business models are gaining popularity." +
                             " Yet the disruptive potential of this technology is often obscured by hype and misconception. This detailed guide distills the complex, " +
@@ -493,7 +493,7 @@ public class InsertBooks implements CommandLineRunner {
                     .year(2025)
                     .isNew(true)
                     .isbn("9781633437203")
-                    .coverImage("https://skybooks.ir/images/productImages/LLMs-in-Production_ZE1739115231.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/LLMs-in-Production_ZE1739115231.jpg")
                     .description("LLMs in Production delivers vital insights into delivering MLOps for LLMs. You’ll learn how to operationalize these powerful AI models for chatbots, coding assistants, and more. " +
                             "Find out what makes LLMs so different from traditional software and ML, discover best practices for working with them out of the lab, " +
                             "and dodge common pitfalls with experienced advice.\n" +
@@ -525,7 +525,7 @@ public class InsertBooks implements CommandLineRunner {
                     .year(2025)
                     .isNew(true)
                     .isbn("9781633437647")
-                    .coverImage("https://skybooks.ir/images/productImages/Data-Analysis-with-LLMs_eI1746449146.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Data-Analysis-with-LLMs_eI1746449146.jpg")
                     .description("Speed up common data science tasks with AI assistants like ChatGPT and Large Language Models (LLMs) from Anthropic, " +
                             "Cohere, Open AI, Google, Hugging Face, and more!\n" +
                             "Data Analysis with LLMs teaches you to use the new generation of AI assistants and Large Language Models (LLMs) to aid and accelerate common data science tasks.\n" +
@@ -553,7 +553,7 @@ public class InsertBooks implements CommandLineRunner {
                     .rating(4.8)
                     .year(2024)
                     .isbn("9781633438453")
-                    .coverImage("https://skybooks.ir/images/productImages/Build-Your-Own-Robot_8d1706282248.jpg")
+                    .coverImage("https://api.skybooks.ir/images/productImages/Build-Your-Own-Robot_8d1706282248.jpg")
                     .description("Using Python, CRICKIT, and Raspberry PI  A DIY guide to bringing your first robot to life with cheap and basic components.\n" +
                             "Build Your Own Robot introduces you to the exciting world of robotics in a way that’s fun and affordable! " +
                             "You’ll build your own real robot with easy-to-find hardware and free open source software. Plus, " +
