@@ -3,7 +3,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/iampawan/FlutterExampleApps.svg?style=social&label=Fork)](https://github.com/amirziyacode?tab=repositories)
 
 
-# 📚 Book Store Website – Spring Boot
+# 📚 Spring-BookStore
 
 An advanced online bookstore built with **Java Spring Boot**, where users can browse and order books, interact with an **AI chatbot**, and admins can manage the entire platform through a dedicated panel.
 
