@@ -12,7 +12,7 @@ An advanced online bookstore built with **Java Spring Boot**, where users can br
 ## 🌐 Live Demo
 
 Check out the deployed frontend here: [https://ai-book-store-jyd2.vercel.app/](https://ai-book-store-jyd2.vercel.app/)
-👉 The full project is on my YouTube channel: [Youtube](https://youtu.be/kkawMlC8FjY?si=RhA2HFhNBzB-lKRF)
+The full project is on my YouTube channel: [Youtube](https://youtu.be/kkawMlC8FjY?si=RhA2HFhNBzB-lKRF)
 > ⚠️ Note: This is the frontend-only version and is not connected to the backend API yet. Some features like login, ordering, and chatbot may not function properly.
 
 ---
