@@ -74,4 +74,10 @@ public class VerificationCodeService {
     private static boolean isCodeActiveAndNotExpired(VerificationCode byCodeAndUserEmail) {
         return !LocalDateTime.now().isAfter(byCodeAndUserEmail.getExpireTime()) && !byCodeAndUserEmail.getUsed();
     }
+
+    public void sendVerificationCodeByEmail(User user) {
+        VerificationCode verificationCode = generateVerificationCode(user);
+        emailService.sendVarificationCode(user.getEmail(),verificationCode.getCode());
+    }
+
 }

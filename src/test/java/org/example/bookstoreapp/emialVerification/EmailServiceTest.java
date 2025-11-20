@@ -70,10 +70,8 @@ class EmailServiceTest {
                 .build();
 
         when(verificationCodeService.generateVerificationCode(user)).thenReturn(verificationCode);
-
-        emailService.sendVerificationCodeByEmail(user);
-
-        verify(mailSender,times(1)).send(mimeMessage);
+        doNothing().when(verificationCodeService).sendVerificationCodeByEmail(user);
+        verify(mailSender,times(1)).send(any(MimeMessage.class));
         verify(mailSender,times(1)).createMimeMessage();
     }
 }

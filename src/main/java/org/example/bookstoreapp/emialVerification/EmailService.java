@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final JavaMailSender mailSender;
-    private final VerificationCodeService verificationCodeService;
 
     @Async
     public void sendVarificationCode(String to, String code){
@@ -33,11 +32,5 @@ public class EmailService {
             throw new RuntimeException("Failed to send email",e);
         }
     }
-
-    public void sendVerificationCodeByEmail(User user) {
-        VerificationCode verificationCode = verificationCodeService.generateVerificationCode(user);
-        sendVarificationCode(user.getEmail(),verificationCode.getCode());
-    }
-
 
 }

@@ -1,8 +1,6 @@
 package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import lombok.RequiredArgsConstructor;
-import org.example.bookstoreapp.emialVerification.EmailService;
-import org.example.bookstoreapp.emialVerification.VerificationCode;
 import org.example.bookstoreapp.emialVerification.VerificationCodeService;
 import org.example.bookstoreapp.jwtToken.JwtService;
 import org.example.bookstoreapp.user.UserRepo;
@@ -23,7 +21,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final VerificationCodeService verificationCodeService;
-    private final EmailService emailService;
 
     /**
      * This Method for Create User is not Excite in Database
@@ -41,7 +38,7 @@ public class AuthenticationService {
             try {
                 User user = userService.createUser(registerRequest);
 
-                emailService.sendVerificationCodeByEmail(user);
+                verificationCodeService.sendVerificationCodeByEmail(user);
 
                 String token = jwtService.generateToken(user);
 

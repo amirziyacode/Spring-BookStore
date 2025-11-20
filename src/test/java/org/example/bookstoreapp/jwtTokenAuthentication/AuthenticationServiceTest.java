@@ -1,7 +1,7 @@
 package org.example.bookstoreapp.jwtTokenAuthentication;
 
 import org.assertj.core.api.Assertions;
-import org.example.bookstoreapp.emialVerification.EmailService;
+
 import org.example.bookstoreapp.emialVerification.VerificationCode;
 import org.example.bookstoreapp.emialVerification.VerificationCodeService;
 import org.example.bookstoreapp.jwtToken.JwtService;
@@ -33,7 +33,6 @@ class AuthenticationServiceTest {
     @Mock private JwtService jwtService;
     @Mock private AuthenticationManager authenticationManager;
     @Mock private VerificationCodeService verificationCodeService;
-    @Mock private EmailService emailService;
 
     @InjectMocks
     private AuthenticationService authenticationService;
@@ -92,7 +91,7 @@ class AuthenticationServiceTest {
         verify(jwtService).generateToken(user);
         verify(jwtService).revokeAllUserTokens(user);
         verify(jwtService).saveUserToken(TOKEN, user);
-        verify(emailService,times(1)).sendVerificationCodeByEmail(user);
+        verify(verificationCodeService,times(1)).sendVerificationCodeByEmail(user);
     }
 
     @Test
